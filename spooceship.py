@@ -16,6 +16,8 @@ def speed_lines(wow):
             x1 = random.randint(0,1501)
             y1 = random.randint(0,751)
             arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
+    elif wow == 0:
+        arcade.draw_line(0, 900, 0, 900, arcade.color.BLACK, 0.1)
 
 
 def spoceship(x,y):
@@ -43,11 +45,11 @@ b = 0
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 def on_draw(delta_time):
-    global SPOOD
-    global SPEED
-    global b
-    global WINDOW_HEIGHT
-    global WINDOW_LENGTH
+    # global SPOOD
+    # global SPEED
+    # global b
+    # global WINDOW_HEIGHT
+    # global WINDOW_LENGTH
     arcade.start_render()
     stars()
     spoceship(on_draw.x, on_draw.y)
@@ -64,7 +66,7 @@ def on_draw(delta_time):
             speed_lines(1)
             b += 1
             print(b)
-            if b%40 == 0:
+            if b%60 == 0:
                 flash(1)
                 speed_lines(0)                
                 SPEED=5
