@@ -32,27 +32,30 @@ def spoceship(x,y):
     fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
+def explosion(): #Make explosion cooler
+    arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
+    arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
+''' Not needed tbh
 def flash(hm):
     if hm == 1:
         arcade.draw_circle_filled(0,0,1000000000000,arcade.color.WHITE,1)
     elif hm == 0:
         arcade.draw_circle_filled(0,0,0,arcade.color.WHITE,1)
+'''
 
 
 SPOOD = 0
 SPEED = 5
 b = 0
+a = 1
+boom = 0
 
 
 
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 def on_draw(delta_time):
-    global SPOOD
     global SPEED
-    global b
-    global WINDOW_HEIGHT
-    global WINDOW_LENGTH
     arcade.start_render()
     stars()
     spoceship(on_draw.x, on_draw.y)
@@ -60,13 +63,30 @@ def on_draw(delta_time):
     on_draw.x += SPEED
     on_draw.y += SPOOD
 
-    if SPEED == 700:
+    if SPEED > 300:
         speed_lines(1)
-    elif SPEED < 500:
+    elif SPEED < 300:
         speed_lines(0)
 
     if on_draw.x > WINDOW_LENGTH + 150:       
         on_draw.x = -250
+
+    if on_draw.y > WINDOW_HEIGHT-100:
+        on_draw.y = WINDOW_HEIGHT-100
+
+    if on_draw.y < 100:
+        on_draw.y = 100
+    
+    if a%10 == 0:
+        arcade.draw_circle_filled(0,0,1000000000000,arcade.color.BLACK,1)
+        arcade.draw_text("hehe spoceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
+    
+    if boom == 20:
+        SPEED = 0
+        explosion()
+
+
+
 
 
 on_draw.x = -200
@@ -87,6 +107,9 @@ class MyGame(arcade.Window):
         global b
         global SPEED
         global speed_lines
+        global a
+        global boom
+
         if key == arcade.key.UP or key == arcade.key.W:
             on_draw.y += 20
 
@@ -99,8 +122,15 @@ class MyGame(arcade.Window):
                 SPEED = 700
 
         elif key == arcade.key.LEFT or key == arcade.key.A:
-            SPEED /= 1.5
-            
+            SPEED /= 1.3
+
+        if key == arcade.key.O:
+            a += 1
+            print(a)
+        
+        if key == arcade.key.E:
+            boom += 1
+            print(boom)
 
 def main():
     window = MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
