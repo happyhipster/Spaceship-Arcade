@@ -11,13 +11,14 @@ def stars():
         arcade.draw_circle_filled(ax,ay,1,arcade.color.WHITE,1)
 
 def speed_lines(wow):
-    if wow == 1:
-        for i in range(100):
-            x1 = random.randint(0,1501)
-            y1 = random.randint(0,751)
-            arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
-    elif wow == 0:
-        arcade.draw_line(0, 900, 0, 900, arcade.color.BLACK, 0.1)
+        if wow == 1:
+            for i in range(100):
+                x1 = random.randint(0,1501)
+                y1 = random.randint(0,751)
+                arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
+        else:
+            arcade.draw_line(900, 900, 900 ,900, arcade.color.BLACK, 1)
+
 
 
 def spoceship(x,y):
@@ -38,18 +39,20 @@ def flash(hm):
         arcade.draw_circle_filled(0,0,0,arcade.color.WHITE,1)
 
 
-SPOOD = 10
+SPOOD = 0
 SPEED = 5
 b = 0
+
+
 
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 def on_draw(delta_time):
-    # global SPOOD
-    # global SPEED
-    # global b
-    # global WINDOW_HEIGHT
-    # global WINDOW_LENGTH
+    global SPOOD
+    global SPEED
+    global b
+    global WINDOW_HEIGHT
+    global WINDOW_LENGTH
     arcade.start_render()
     stars()
     spoceship(on_draw.x, on_draw.y)
@@ -57,32 +60,13 @@ def on_draw(delta_time):
     on_draw.x += SPEED
     on_draw.y += SPOOD
 
+    if SPEED == 700:
+        speed_lines(1)
+    elif SPEED < 500:
+        speed_lines(0)
+
     if on_draw.x > WINDOW_LENGTH + 150:       
         on_draw.x = -250
-        SPEED = SPEED * 2.5
-        if SPEED > 300:
-            SPEED = 300
-            SPOOD = 0
-            speed_lines(1)
-            b += 1
-            print(b)
-            if b%60 == 0:
-                flash(1)
-                speed_lines(0)                
-                SPEED=5
-                b+=1
-                print(SPEED)
-                print(b)                
-                # if b == 125:
-                #     SPEED = 1
-
-
-
-    if on_draw.y == 600:
-        SPOOD = -2
-
-    if on_draw.y == 150:
-        SPOOD = 2
         
 
 on_draw.x = -200
@@ -97,9 +81,32 @@ class MyGame(arcade.Window):
 
         arcade.set_background_color(arcade.color.BLACK)
 
+    
+
+    def on_key_press(self, key, modifiers):
+        global b
+        global SPEED
+        global speed_lines
+        if key == arcade.key.UP or key == arcade.key.W:
+            on_draw.y += 20
+
+        elif key == arcade.key.DOWN or key == arcade.key.S:
+            on_draw.y += -20
+
+        if key == arcade.key.RIGHT or key == arcade.key.D:
+            SPEED *= 1.5
+            if SPEED > 700:
+                SPEED = 700
+
+        elif key == arcade.key.LEFT or key == arcade.key.A:
+            SPEED /= 1.5
+            
+
 def main():
     window = MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
     arcade.schedule(on_draw, 1/60)
     arcade.run()    
+
+
 
 main()
