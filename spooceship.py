@@ -67,7 +67,7 @@ def on_draw(delta_time):
 
     if on_draw.x > WINDOW_LENGTH + 150:       
         on_draw.x = -250
-        
+
 
 on_draw.x = -200
 on_draw.y = 0
