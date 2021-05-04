@@ -56,6 +56,7 @@ WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 def on_draw(delta_time):
     global SPEED
+    global boom
     arcade.start_render()
     stars()
     spoceship(on_draw.x, on_draw.y)
@@ -68,22 +69,25 @@ def on_draw(delta_time):
     elif SPEED < 300:
         speed_lines(0)
 
-    if on_draw.x > WINDOW_LENGTH + 150:       
-        on_draw.x = -250
 
-    if on_draw.y > WINDOW_HEIGHT-100:
-        on_draw.y = WINDOW_HEIGHT-100
-
-    if on_draw.y < 100:
-        on_draw.y = 100
     
     if a%10 == 0:
         arcade.draw_circle_filled(0,0,1000000000000,arcade.color.BLACK,1)
         arcade.draw_text("hehe spoceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
     
-    if boom == 20:
-        SPEED = 0
-        explosion()
+    if boom == 10:
+        if on_draw.x >50:
+            SPEED = 75
+            explosion()
+    elif boom != 10:
+        if on_draw.x > WINDOW_LENGTH + 150:       
+            on_draw.x = -250
+
+        if on_draw.y > WINDOW_HEIGHT-100:
+            on_draw.y = WINDOW_HEIGHT-100
+
+        if on_draw.y < 100:
+            on_draw.y = 100
 
 
 
