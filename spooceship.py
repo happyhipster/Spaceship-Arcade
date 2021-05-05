@@ -48,6 +48,7 @@ SPOOD = 0
 SPEED = 5
 b = 0
 a = 1
+space = 2
 boom = 0
 
 
@@ -74,6 +75,7 @@ def on_draw(delta_time):
     if a%10 == 0:
         arcade.draw_circle_filled(0,0,1000000000000,arcade.color.BLACK,1)
         arcade.draw_text("hehe spoceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
+        SPEED = 700
     
     if boom == 10:
         if on_draw.x >50:
@@ -100,9 +102,7 @@ class MyGame(arcade.Window):
     def __init__(self,width,height,title):
 
         super().__init__(width, height, title)
-
         self.set_mouse_visible(False)
-
         arcade.set_background_color(arcade.color.BLACK)
 
     
@@ -113,6 +113,7 @@ class MyGame(arcade.Window):
         global speed_lines
         global a
         global boom
+        global space
 
         if key == arcade.key.UP or key == arcade.key.W:
             on_draw.y += 20
@@ -136,8 +137,15 @@ class MyGame(arcade.Window):
             boom += 1
             print(boom)
 
+        if key == arcade.key.SPACE:
+            space += 1
+            if space%2 == 1:
+                SPEED = 0
+            elif space%2 == 0:
+                SPEED = 10
+
 def main():
-    window = MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
+    MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
     arcade.schedule(on_draw, 1/60)
     arcade.run()    
 
