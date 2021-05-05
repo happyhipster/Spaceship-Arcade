@@ -4,12 +4,15 @@ Also don't mind the variable names
 '''
 import arcade
 import random
+
+#Drawing stars in random coordinates
 def stars():
     for i in range(100):
         ax = random.randint(0,1501)
         ay = random.randint(0,751)
         arcade.draw_circle_filled(ax,ay,1,arcade.color.WHITE,1)
 
+#Lines during the warp phase
 def speed_lines(wow):
         if wow == 1:
             for i in range(100):
@@ -20,7 +23,7 @@ def speed_lines(wow):
             arcade.draw_line(900, 900, 900 ,900, arcade.color.BLACK, 1)
 
 
-
+#Drawing the spooceship
 def spoceship(x,y):
     arcade.draw_rectangle_filled(x, y, 200, 100, arcade.color.RED)
     arcade.draw_triangle_filled(x, y+50, x-150, y+150, x-100, y+50, arcade.color.DARK_RED)
@@ -32,10 +35,12 @@ def spoceship(x,y):
     fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
-def explosion(): #Make explosion cooler
+#Drawing explosions
+def explosion():
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
-''' Not needed tbh
+
+''' Not needed 
 def flash(hm):
     if hm == 1:
         arcade.draw_circle_filled(0,0,1000000000000,arcade.color.WHITE,1)
@@ -43,7 +48,7 @@ def flash(hm):
         arcade.draw_circle_filled(0,0,0,arcade.color.WHITE,1)
 '''
 
-
+#Declaring the variables
 SPOOD = 0
 SPEED = 5
 b = 0
@@ -51,30 +56,32 @@ a = 1
 space = 2
 boom = 0
 
-
-
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
+
+#Function to animate
 def on_draw(delta_time):
     global SPEED
     global boom
     arcade.start_render()
+    #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
 
+    #Animating by adding a value to the x and y
     on_draw.x += SPEED
     on_draw.y += SPOOD
 
+    #When the speed of the ship is more than 300, the speed lines function is called. If the speed of the ship is lower than 300, then the 'speed lines' go away.
     if SPEED > 300:
         speed_lines(1)
     elif SPEED < 300:
         speed_lines(0)
 
 
-    
     if a%10 == 0:
         arcade.draw_circle_filled(0,0,1000000000000,arcade.color.BLACK,1)
-        arcade.draw_text("hehe spoceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
+        arcade.draw_text("hehe spooceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
         SPEED = 700
     
     if boom == 10:
