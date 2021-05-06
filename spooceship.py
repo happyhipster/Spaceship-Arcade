@@ -113,10 +113,19 @@ class MyGame(arcade.Window):
         arcade.set_background_color(arcade.color.BLACK)
 
     
-
+    #Function to detect the keyboard input
     def on_key_press(self, key, modifiers):
         global b
         global SPEED
+        
+
+
+
+
+
+
+
+
         global speed_lines
         global a
         global boom
