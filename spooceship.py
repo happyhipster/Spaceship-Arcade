@@ -117,15 +117,6 @@ class MyGame(arcade.Window):
     def on_key_press(self, key, modifiers):
         global b
         global SPEED
-        
-
-
-
-
-
-
-
-
         global speed_lines
         global a
         global boom
