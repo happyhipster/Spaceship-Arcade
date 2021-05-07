@@ -84,11 +84,11 @@ def on_draw(delta_time):
         arcade.draw_text("hehe spooceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
         SPEED = 700
     
-    if boom == 10:
+    if boom == 15:
         if on_draw.x >50:
             SPEED = 75
             explosion()
-    elif boom != 10:
+    elif boom != 15:
         if on_draw.x > WINDOW_LENGTH + 150:       
             on_draw.x = -250
 
