@@ -2,6 +2,8 @@
 After this process the code continues looping. :3 
 Also don't mind the variable names 
 '''
+
+'''YO YOURE IN GAME BRANCH REMEMBER, ITS TO ADD THE COLLECTABLES AND ALL THAT CUZ FOLIO 2 IS A PAIN IN THE A$$'''
 import arcade
 import random
 
@@ -40,13 +42,6 @@ def explosion():
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
 
-''' Not needed 
-def flash(hm):
-    if hm == 1:
-        arcade.draw_circle_filled(0,0,1000000000000,arcade.color.WHITE,1)
-    elif hm == 0:
-        arcade.draw_circle_filled(0,0,0,arcade.color.WHITE,1)
-'''
 
 #Declaring the variables
 SPOOD = 0
