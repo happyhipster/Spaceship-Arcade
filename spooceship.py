@@ -1,3 +1,4 @@
+#NOTES MAKE THE GAME MECHANIC COLLECTABLES DURING CLASS OR SMTHN IDK MAAAAAN
 #importing the 'arcade' package and 'random' package
 import arcade
 import random
