@@ -1,9 +1,4 @@
-''' COOMMENTS, this code is looped. The process is the spaceship getting gradually faster then entering 'hyperspace' and then flashing back to normal speed.
-After this process the code continues looping. :3 
-Also don't mind the variable names 
-'''
-
-'''YO YOURE IN GAME BRANCH REMEMBER, ITS TO ADD THE COLLECTABLES AND ALL THAT CUZ FOLIO 2 IS A PAIN IN THE A$$'''
+#importing the 'arcade' package and 'random' package
 import arcade
 import random
 
@@ -14,7 +9,8 @@ def stars():
         ay = random.randint(0,751)
         arcade.draw_circle_filled(ax,ay,1,arcade.color.WHITE,1)
 
-#Lines during the warp phase
+
+#Lines during the 'warp phase'
 def speed_lines(wow):
         if wow == 1:
             for i in range(100):
@@ -37,7 +33,8 @@ def spoceship(x,y):
     fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
-#Drawing explosions
+
+#Drawing the explosion
 def explosion():
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
@@ -51,11 +48,14 @@ a = 1
 space = 2
 boom = 0
 
+
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 
-#Function to animate
+
+#Function for animaring
 def on_draw(delta_time):
+    #access global variables in this function
     global SPEED
     global boom
     arcade.start_render()
@@ -63,27 +63,30 @@ def on_draw(delta_time):
     stars()
     spoceship(on_draw.x, on_draw.y)
 
-    #Animating by adding a value to the x and y
+    #Animating by adding value to the x and y
     on_draw.x += SPEED
     on_draw.y += SPOOD
 
-    #When the speed of the ship is more than 300, the speed lines function is called. If the speed of the ship is lower than 300, then the 'speed lines' go away.
+    #conditional: when the speed of the ship is more than 300, the speed_lines function is called.
+    #If the speed of the ship is lower than 300, then the speed_lines are gone.
     if SPEED > 300:
         speed_lines(1)
-    elif SPEED < 300:
+    else:
         speed_lines(0)
 
 
+    #conditionals: if a (counter of key 'o') is divisible by 10, cover screen with black circle and add text, "hehe spooceship go brr" then set speed to 700
     if a%10 == 0:
         arcade.draw_circle_filled(0,0,1000000000000,arcade.color.BLACK,1)
         arcade.draw_text("hehe spooceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
         SPEED = 700
     
+    #conditionals: if boom (counter of key 'e') if on_draw.x is bigger than 50, set speed to 75 then call explosion function. 
     if boom == 15:
         if on_draw.x >50:
             SPEED = 75
             explosion()
-    elif boom != 15:
+    else:
         if on_draw.x > WINDOW_LENGTH + 150:       
             on_draw.x = -250
 
@@ -94,13 +97,12 @@ def on_draw(delta_time):
             on_draw.y = 100
 
 
-
-
-
 on_draw.x = -200
 on_draw.y = 0
 
+
 class MyGame(arcade.Window):
+    #setting the screen
     def __init__(self,width,height,title):
 
         super().__init__(width, height, title)
@@ -108,7 +110,7 @@ class MyGame(arcade.Window):
         arcade.set_background_color(arcade.color.BLACK)
 
     
-    #Function to detect the keyboard input
+    #function for user input
     def on_key_press(self, key, modifiers):
         global b
         global SPEED
@@ -117,6 +119,7 @@ class MyGame(arcade.Window):
         global boom
         global space
 
+        #this code speaks for itself (?)
         if key == arcade.key.UP or key == arcade.key.W:
             on_draw.y += 20
 
@@ -147,10 +150,11 @@ class MyGame(arcade.Window):
                 SPEED = 10
 
 def main():
+    #Set canvas then run
     MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
     arcade.schedule(on_draw, 1/60)
     arcade.run()    
 
 
-
+#Call main function to run
 main()
