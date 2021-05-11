@@ -54,7 +54,7 @@ WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 
 
-#Function for animaring
+#Function for animating
 def on_draw(delta_time):
     #access global variables in this function
     global SPEED
