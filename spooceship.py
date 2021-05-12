@@ -40,7 +40,7 @@ def spoceship(x,y):
     arcade.draw_circle_filled(x+50,y,window_s,arcade.color.WHITE,1)
     arcade.draw_circle_filled(x+50,y,window_s-15,arcade.color.AQUA,1)
 
-    fire_inside_point_list = ((x-spooceship_w/2,y+spooceship_l/2), (x-spooceship_w*0.75,y+spooceship_l*0.25), (x-spooceship_w*20/13,y+spooceship_l*0.1), (x-spooceship_w*1.25,y), (x-spooceship_w*10/7,y-spooceship_l*20/3), (x-spooceship_w*1.6,y-spooceship_l*0.25), (x-spooceship_w*5/3,y-spooceship_l*20/7), (x-spooceship_w*10/7,y-spooceship_l*20/3), (x-spooceship_w*0.5,y-spooceship_l*0.5))
+    fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
 
