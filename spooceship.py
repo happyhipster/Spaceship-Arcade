@@ -7,70 +7,108 @@ def stars():
     for i in range(100):
         ax = random.randint(0,1501)
         ay = random.randint(0,751)
-        arcade.draw_circle_filled(ax,ay,1,arcade.color.WHITE,1)
+        star_size = random.randint(0,4)
+        arcade.draw_circle_filled(ax,ay,star_size,arcade.color.WHITE,1)
+
+def flash(o):
+    if o == 0:
+        for i in range(1):
+            arcade.draw_circle_filled(0,0,1000000,arcade.color.WHITE,1)
 
 
 #Lines during the 'warp phase'
-def speed_lines():
+def speed_lines(decider):
+    if decider == 0:
         for i in range(100):
             x1 = random.randint(0,1501)
             y1 = random.randint(0,751)
             arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
 
+def planet():
+    arcade.draw_circle_filled(1300,600,ss,arcade.color.RADICAL_RED,1)
+
+
 
 #Drawing the spooceship
 def spoceship(x,y):
-    arcade.draw_rectangle_filled(x, y, 200, 100, arcade.color.RED)
+    arcade.draw_rectangle_filled(x, y, spooceship_w, spooceship_l, arcade.color.RED)
     arcade.draw_triangle_filled(x, y+50, x-150, y+150, x-100, y+50, arcade.color.DARK_RED)
     arcade.draw_triangle_filled(x, y-50, x-150, y-150, x-100, y-50, arcade.color.DARK_RED)
     arcade.draw_triangle_filled(x+100, y+50, x+200, y, x+100, y-50, arcade.color.BLUE_SAPPHIRE)
-    arcade.draw_circle_filled(x+50,y,40,arcade.color.WHITE,1)
-    arcade.draw_circle_filled(x+50,y,25,arcade.color.AQUA,1)
+    arcade.draw_circle_filled(x+50,y,window_s,arcade.color.WHITE,1)
+    arcade.draw_circle_filled(x+50,y,window_s-15,arcade.color.AQUA,1)
 
     fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
 
 #Declaring the variables
-SPOOD = 0
+SPOOD = 1
 SPEED = 5
+v = 2
+s = 3
+ss = 50
+
+timer = 1
 
 
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 
+spooceship_w = 200
+spooceship_l = 100
+window_s = 40
 
 #Function for animaring
 def on_draw(delta_time):
     #access global variables in this function
     global SPEED
     global SPOOD
+    global v
+    global s
+    global timer
     arcade.start_render()
     #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
 
+    if SPEED >= 300:
+        SPEED = 300
+        speed_lines(0)
+        timer += 1
+        print(timer)
+    if timer == 100:
+        speed_lines(10)
+        s = 1
+        SPOOD = 0
+        v = 0
+        SPEED = 2
+        on_draw.y = 300
+        flash(0)
+        timer = 0
+        on_draw.x = 200
+        SPEED = 0
+    if timer == 0:
+        planet()
+
+
+
     #Animating by adding value to the x and y
     on_draw.x += SPEED
     on_draw.y += SPOOD
 
-    #conditional: when the speed of the ship is more than 300, the speed_lines function is called.
-    if SPEED >= 300:
-        speed_lines()
-        SPEED = 300
-
-    #conditional: if on_draw.x is more than the WINDOW_LENGTH+150, set on_draw.x to -250 then times SPEED by 1.5 (once it reaches the end of the window, the spooceship goes back to the start again)
+    #conditional: if on_draw.x is more than the WINDOW_LENGTH+150 (once it reaches the end of the window, the spooceship goes back to the start again)
     if on_draw.x > WINDOW_LENGTH + 150:
         on_draw.x = -250
-        SPEED *= 1.5
+        SPEED *= s
 
     #conditional: if on_draw.y is more than WINDOW_HEIGHT-700, change SPOOD by -2
-    if on_draw.y > WINDOW_HEIGHT-700:
-        SPOOD += -2
+    if on_draw.y > WINDOW_HEIGHT-400:
+        SPOOD -= v
 
     #conditional: else if on_draw.y is less than 700, change SPOOD by 2
-    elif on_draw.y < 700:
-        SPOOD += 2
+    elif on_draw.y < 400:
+        SPOOD += v
 
 
 on_draw.x = -200
@@ -84,6 +122,22 @@ class MyGame(arcade.Window):
         super().__init__(width, height, title)
         self.set_mouse_visible(False)
         arcade.set_background_color(arcade.color.BLACK)
+    
+    def on_key_press(self, key, modifiers):
+        global spooceship_l 
+        global ss
+        global spooceship_w
+        global window_s
+        #this code speaks for itself (?)
+        if timer == 0:
+            if spooceship_w != 160:
+                if key == arcade.key.DOWN:
+                    spooceship_w -= 1
+                    spooceship_l -= 1
+                    window_s -= 0.5
+                    ss += 5
+                
+                    
 
     
     
