@@ -2,6 +2,8 @@
 import arcade
 import random
 
+from arcade.key import X
+
 #Drawing stars in random coordinates
 def stars():
     for i in range(100):
@@ -32,13 +34,13 @@ def planet():
 #Drawing the spooceship
 def spoceship(x,y):
     arcade.draw_rectangle_filled(x, y, spooceship_w, spooceship_l, arcade.color.RED)
-    arcade.draw_triangle_filled(x, y+50, x-150, y+150, x-100, y+50, arcade.color.DARK_RED)
-    arcade.draw_triangle_filled(x, y-50, x-150, y-150, x-100, y-50, arcade.color.DARK_RED)
-    arcade.draw_triangle_filled(x+100, y+50, x+200, y, x+100, y-50, arcade.color.BLUE_SAPPHIRE)
+    arcade.draw_triangle_filled(x, y+spooceship_l/2, x-spooceship_w*0.75, y+spooceship_l*1.5, x-spooceship_w/2, y+spooceship_l/2, arcade.color.DARK_RED)
+    arcade.draw_triangle_filled(x, y-spooceship_l/2, x-spooceship_w*0.75, y-spooceship_l*1.5, x-spooceship_w/2, y-spooceship_l/2, arcade.color.DARK_RED)
+    arcade.draw_triangle_filled(x+spooceship_w/2, y+spooceship_l/2, x+spooceship_w, y, x+spooceship_w/2, y-spooceship_l/2, arcade.color.BLUE_SAPPHIRE)
     arcade.draw_circle_filled(x+50,y,window_s,arcade.color.WHITE,1)
     arcade.draw_circle_filled(x+50,y,window_s-15,arcade.color.AQUA,1)
 
-    fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
+    fire_inside_point_list = ((x-spooceship_w/2,y+spooceship_l/2), (x-spooceship_w*0.75,y+spooceship_l*0.25), (x-spooceship_w*20/13,y+spooceship_l*0.1), (x-spooceship_w*1.25,y), (x-spooceship_w*10/7,y-spooceship_l*20/3), (x-spooceship_w*1.6,y-spooceship_l*0.25), (x-spooceship_w*5/3,y-spooceship_l*20/7), (x-spooceship_w*10/7,y-spooceship_l*20/3), (x-spooceship_w*0.5,y-spooceship_l*0.5))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
 
@@ -46,7 +48,7 @@ def spoceship(x,y):
 SPOOD = 1
 SPEED = 5
 v = 2
-s = 3
+s = 10
 ss = 50
 
 timer = 1
