@@ -135,9 +135,10 @@ class MyGame(arcade.Window):
             if spooceship_w != 160:
                 if key == arcade.key.DOWN:
                     spooceship_w -= 1
-                    spooceship_l -= 1
-                    window_s -= 0.5
+                    spooceship_l -= 0.5
+                    window_s -= 0.2
                     ss += 5
+                    on_draw.x += 1
                 
                     
 
