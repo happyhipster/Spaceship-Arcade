@@ -3,7 +3,11 @@
 import arcade
 import random
 
-from arcade.draw_commands import draw_circle_filled
+def target():
+    arcade.draw_circle_filled(200,100,40,arcade.color.BABY_BLUE,1)
+    arcade.draw_circle_filled(200,300,40,arcade.color.BABY_BLUE,1)
+    arcade.draw_circle_filled(200,500,40,arcade.color.BABY_BLUE,1)
+    arcade.draw_circle_filled(200,700,40,arcade.color.BABY_BLUE,1)
 
 #Drawing stars in random coordinates
 def stars():
@@ -11,17 +15,6 @@ def stars():
         ax = random.randint(0,1501)
         ay = random.randint(0,751)
         arcade.draw_circle_filled(ax,ay,1,arcade.color.WHITE,1)
-
-
-#Lines during the 'warp phase'
-def speed_lines(wow):
-        if wow == 1:
-            for i in range(100):
-                x1 = random.randint(0,1501)
-                y1 = random.randint(0,751)
-                arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
-        else:
-            arcade.draw_line(900, 900, 900 ,900, arcade.color.BLACK, 1)
 
 
 #Drawing the spooceship
@@ -76,48 +69,17 @@ def on_draw(delta_time):
     stars()
     spoceship(on_draw.x, on_draw.y)
     avoid(on_draw.avoid_x, on_draw.avoid_y)
+    on_draw.avoid_x -= 5
+    target()
 
-    #Animating by adding value to the x and y
-    on_draw.x += SPEED
-    on_draw.y += SPOOD
-    on_draw.avoid_x -= SPEED
-
-    #conditional: when the speed of the ship is more than 300, the speed_lines function is called.
-    #If the speed of the ship is lower than 300, then the speed_lines are gone.
-    if SPEED > 300:
-        speed_lines(1)
-    else:
-        speed_lines(0)
+    #conditionals: if boom (counter of key 'e') if on_draw.x is bigger than 50, set speed to 75 then call explosion function.    
+    if on_draw.avoid_x <= 10:
+        on_draw.avoid_x = 1500
+        on_draw.avoid_y = random.randint(0,751)
 
 
-    #conditionals: if a (counter of key 'o') is divisible by 10, cover screen with black circle and add text, "hehe spooceship go brr" then set speed to 700
-    if a%10 == 0:
-        arcade.draw_circle_filled(0,0,1000000000000,arcade.color.BLACK,1)
-        arcade.draw_text("hehe spooceship go brr", 600, 400, arcade.color.WHITE, 50, width=750, align="center", anchor_x="center", anchor_y="center")
-        SPEED = 700
-    
-    #conditionals: if boom (counter of key 'e') if on_draw.x is bigger than 50, set speed to 75 then call explosion function. 
-    if boom == 15:
-        if on_draw.x >50:
-            SPEED = 75
-            explosion()
-    else:
-        if on_draw.x > WINDOW_LENGTH + 150:       
-            on_draw.x = -250
-
-        if on_draw.y > WINDOW_HEIGHT-100:
-            on_draw.y = WINDOW_HEIGHT-100
-
-        if on_draw.y < 100:
-            on_draw.y = 100
-        
-        if on_draw.avoid_x <= 10:
-            on_draw.avoid_x = 1500
-            on_draw.avoid_y = random.randint(0,751)
-
-
-on_draw.x = -200
-on_draw.y = 0
+on_draw.x = 700
+on_draw.y = 400
 on_draw.avoid_x = 1500
 on_draw.avoid_y = random.randint(0,751)
 
