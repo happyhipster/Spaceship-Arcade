@@ -3,6 +3,8 @@
 import arcade
 import random
 
+from arcade.draw_commands import draw_circle_filled
+
 #Drawing stars in random coordinates
 def stars():
     for i in range(100):
@@ -40,8 +42,14 @@ def explosion():
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
 
-def objective(obj_x, obj_y):
-    arcade.draw_circle_filled(obj_x,obj_y,20, arcade.color.RED,1)
+
+def avoid(avoid_x, avoid_y):
+    arcade.draw_circle_filled(avoid_x,avoid_y,20, arcade.color.RED,1)
+    if avoid_x == on_draw.x:
+        if avoid_y == on_draw.y:
+            arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
+            arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
+            
 
 
 
@@ -67,12 +75,12 @@ def on_draw(delta_time):
     #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
-    objective(on_draw.obj_x, on_draw.obj_y)
+    avoid(on_draw.avoid_x, on_draw.avoid_y)
 
     #Animating by adding value to the x and y
     on_draw.x += SPEED
     on_draw.y += SPOOD
-    on_draw.obj_x -= SPEED
+    on_draw.avoid_x -= SPEED
 
     #conditional: when the speed of the ship is more than 300, the speed_lines function is called.
     #If the speed of the ship is lower than 300, then the speed_lines are gone.
@@ -103,15 +111,15 @@ def on_draw(delta_time):
         if on_draw.y < 100:
             on_draw.y = 100
         
-        if on_draw.obj_x <= 10:
-            on_draw.obj_x = 1500
-            on_draw.obj_y = random.randint(0,751)
+        if on_draw.avoid_x <= 10:
+            on_draw.avoid_x = 1500
+            on_draw.avoid_y = random.randint(0,751)
 
 
 on_draw.x = -200
 on_draw.y = 0
-on_draw.obj_x = 1500
-on_draw.obj_y = random.randint(0,751)
+on_draw.avoid_x = 1500
+on_draw.avoid_y = random.randint(0,751)
 
 class MyGame(arcade.Window):
     #setting the screen
