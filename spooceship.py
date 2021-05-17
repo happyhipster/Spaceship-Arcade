@@ -36,10 +36,10 @@ def explosion():
     arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
 
 
-def avoid(avoid_x, avoid_y):
-    arcade.draw_circle_filled(avoid_x,avoid_y,20, arcade.color.RED,1)
-    if avoid_x == on_draw.x:
-        if avoid_y == on_draw.y:
+def hit(hit_x, hit_y):
+    arcade.draw_circle_filled(hit_x,hit_y,20, arcade.color.RED,1)
+    if hit_x == on_draw.x:
+        if hit_y == on_draw.y:
             arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
             arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
             
@@ -54,6 +54,7 @@ a = 1
 space = 2
 boom = 0
 
+avoid_y_list = [100, 300, 500, 700]
 
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
@@ -68,20 +69,23 @@ def on_draw(delta_time):
     #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
-    avoid(on_draw.avoid_x, on_draw.avoid_y)
-    on_draw.avoid_x -= 5
+    hit(on_draw.hit_x, on_draw.hit_y)
+    on_draw.hit_x -= 50
     target()
 
     #conditionals: if boom (counter of key 'e') if on_draw.x is bigger than 50, set speed to 75 then call explosion function.    
-    if on_draw.avoid_x <= 10:
-        on_draw.avoid_x = 1500
-        on_draw.avoid_y = random.randint(0,751)
+    if on_draw.hit_x <= 10:
+        on_draw.hit_x = 1500
+        g = random.randint(0,3)
+        on_draw.hit_y = avoid_y_list[g]
+
 
 
 on_draw.x = 700
 on_draw.y = 400
-on_draw.avoid_x = 1500
-on_draw.avoid_y = random.randint(0,751)
+on_draw.hit_x = 1500
+g = random.randint(0,4)
+on_draw.hit_y = avoid_y_list[g]
 
 class MyGame(arcade.Window):
     #setting the screen
@@ -93,43 +97,23 @@ class MyGame(arcade.Window):
 
     
     #function for user input
-    def on_key_press(self, key, modifiers):
-        global b
-        global SPEED
-        global speed_lines
-        global a
-        global boom
-        global space
-
+    # def on_key_press(self, key, modifiers):
         #this code speaks for itself (?)
-        if key == arcade.key.UP or key == arcade.key.W:
-            on_draw.y += 20
+        # if key == arcade.key.UP or key == arcade.key.W:
+        #     on_draw.y += 20
 
-        elif key == arcade.key.DOWN or key == arcade.key.S:
-            on_draw.y += -20
+        # elif key == arcade.key.DOWN or key == arcade.key.S:
+        #     on_draw.y += -20
 
-        if key == arcade.key.RIGHT or key == arcade.key.D:
-            SPEED *= 1.5
-            if SPEED > 700:
-                SPEED = 700
+        # if key == arcade.key.RIGHT or key == arcade.key.D:
 
-        elif key == arcade.key.LEFT or key == arcade.key.A:
-            SPEED /= 1.3
 
-        if key == arcade.key.O:
-            a += 1
-            print(a)
+        # elif key == arcade.key.LEFT or key == arcade.key.A:
+        #     SPEED /= 1.3
+
+
         
-        if key == arcade.key.E:
-            boom += 1
-            print(boom)
 
-        if key == arcade.key.SPACE:
-            space += 1
-            if space%2 == 1:
-                SPEED = 0
-            elif space%2 == 0:
-                SPEED = 10
 
 def main():
     #Set canvas then run
