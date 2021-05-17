@@ -1,6 +1,0 @@
-Making collectibles
-Use.... collision and maybe something like if the spaceship x and y is the same as the coordinates of the collectible
-then use a variable to count the scores and point scores either in terminal or the screen.
-
-The collectible can be some sort of coin or space related, maybe satellite (effort but worth it?)
-Game doesnt have to end sooooooooo B) nothing needed to make the game end, just infinite loop of collecting stuff and whatever idk maaan i need sleeeeeep
