@@ -4,10 +4,10 @@ import arcade
 import random
 
 def target():
-    arcade.draw_circle_filled(200,100,40,arcade.color.BABY_BLUE,1)
-    arcade.draw_circle_filled(200,300,40,arcade.color.BABY_BLUE,1)
-    arcade.draw_circle_filled(200,500,40,arcade.color.BABY_BLUE,1)
-    arcade.draw_circle_filled(200,700,40,arcade.color.BABY_BLUE,1)
+    arcade.draw_circle_filled(200,100,40,(235,64,64),1)
+    arcade.draw_circle_filled(200,300,40,(235,64,64),1)
+    arcade.draw_circle_filled(200,500,40,(235,64,64),1)
+    arcade.draw_circle_filled(200,700,40,(235,64,64),1)
 
 #Drawing stars in random coordinates
 def stars():
@@ -37,7 +37,7 @@ def explosion():
 
 
 def hit(hit_x, hit_y):
-    arcade.draw_circle_filled(hit_x,hit_y,20, arcade.color.RED,1)
+    arcade.draw_circle_filled(hit_x,hit_y,20, arcade.color.WHITE,1)
     if hit_x == on_draw.x:
         if hit_y == on_draw.y:
             arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
@@ -84,7 +84,7 @@ def on_draw(delta_time):
 on_draw.x = 700
 on_draw.y = 400
 on_draw.hit_x = 1500
-g = random.randint(0,4)
+g = random.randint(0,3)
 on_draw.hit_y = avoid_y_list[g]
 
 class MyGame(arcade.Window):
