@@ -101,7 +101,6 @@ class MyGame(arcade.Window):
         #this code speaks for itself (?)
         # if key == arcade.key.UP or key == arcade.key.W:
         #     on_draw.y += 20
-
         # elif key == arcade.key.DOWN or key == arcade.key.S:
         #     on_draw.y += -20
 
@@ -110,9 +109,6 @@ class MyGame(arcade.Window):
 
         # elif key == arcade.key.LEFT or key == arcade.key.A:
         #     SPEED /= 1.3
-
-
-        
 
 
 def main():
