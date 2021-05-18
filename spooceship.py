@@ -113,9 +113,6 @@ class MyGame(arcade.Window):
                         score -= 1
                         print(score)
                         r = arcade.color.RED_DEVIL
-                if score % 5:
-                    hit_speed *= 2
-                    radius *= 1.2
                     
         if t == 0:
             if key == arcade.key.LEFT or key == arcade.key.A:
@@ -129,9 +126,6 @@ class MyGame(arcade.Window):
                         score -= 1
                         print(score)
                         r = arcade.color.RED_DEVIL
-                if score % 5:
-                    hit_speed *= 2
-                    radius *= 1.2
 
         if t == 0:
             if key == arcade.key.RIGHT or key == arcade.key.D:
@@ -145,9 +139,6 @@ class MyGame(arcade.Window):
                         score -= 1
                         print(score)
                         r = arcade.color.RED_DEVIL
-                if score % 5:
-                    hit_speed *= 2
-                    radius *= 1.2
 
         if t == 0:
             if key == arcade.key.DOWN or key == arcade.key.S:
@@ -161,9 +152,7 @@ class MyGame(arcade.Window):
                         score -= 1
                         print(score)
                         r = arcade.color.RED_DEVIL
-                if score % 5:
-                    hit_speed *= 2
-                    radius *= 1.2
+
             
 
 def main():
