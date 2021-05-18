@@ -29,29 +29,17 @@ def spoceship(x,y):
     fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
-
-#Drawing the explosion
-def explosion():
-    arcade.draw_circle_filled(on_draw.x, on_draw.y, 300, arcade.color.RED, 10)
-    arcade.draw_circle_filled(on_draw.x, on_draw.y, 150, arcade.color.YELLOW, 10)
-
-
-def hit(hit_x, hit_y, r):
-    if r == 1:
-        arcade.draw_circle_filled(hit_x,hit_y,20, arcade.color.WHITE,1)
-    elif r == 2:
-        arcade.draw_circle_filled(hit_x,hit_y,30, arcade.color.GO_GREEN,1)
-            
-
-
+def hit(hit_x, hit_y):
+    arcade.draw_circle_filled(hit_x,hit_y,radius, r,1)        
 
 #Declaring the variables
 SPOOD = 0
 SPEED = 5
-b = 0
-a = 1
+r = arcade.color.WHITE
 score = 0
-r = 1
+hit_speed = 5
+t = 0
+radius = 20
 
 avoid_y_list = [100, 300, 500, 700]
 
@@ -63,20 +51,30 @@ WINDOW_LENGTH = 1500
 def on_draw(delta_time):
     #access global variables in this function
     global SPEED
+    global t
+    global score
+    global hit_speed
+    global radius
     global r
     arcade.start_render()
-    r = 1
     #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
-    hit(on_draw.hit_x, on_draw.hit_y,r)
-    on_draw.hit_x -= 3
+    hit(on_draw.hit_x, on_draw.hit_y)
+    on_draw.hit_x -= hit_speed
     target()
+    arcade.draw_text(str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
     if on_draw.hit_x <= 10:
+        print(score)
+        t = 0
+        if r == arcade.color.WHITE:
+            score -= 1
         on_draw.hit_x = 1500
         g = random.randint(0,3)
         on_draw.hit_y = avoid_y_list[g]
+        r = arcade.color.WHITE
+
 
 
 
@@ -87,7 +85,6 @@ g = random.randint(0,3)
 on_draw.hit_y = avoid_y_list[g]
 
 class MyGame(arcade.Window):
-    global r
     #setting the screen
     def __init__(self,width,height,title):
 
@@ -98,32 +95,76 @@ class MyGame(arcade.Window):
     
     #function for user input
     def on_key_press(self, key, modifiers):
+        global score
+        global t
+        global hit_speed
+        global radius
+        global r
         #this code speaks for itself (?)
-        # if key == arcade.key.UP or key == arcade.key.W:
-        #     if on_draw.hit_y == 700:
-        #         if 220 > on_draw.hit_x:
-        #             r +=1
-                
-        # elif key == arcade.key.LEFT or key == arcade.key.A:
-        #     if on_draw.hit_y == 500:
-        #         if 220 > on_draw.hit_x:
-        #             r +=1
+        if t == 0:
+            if key == arcade.key.UP or key == arcade.key.W:
+                t += 1
+                if on_draw.hit_y == 700:
+                    if on_draw.hit_x < 400:
+                        score += 1
+                        print(score)
+                        r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
+                if score % 5:
+                    hit_speed *= 2
+                    radius *= 1.2
+                    
+        if t == 0:
+            if key == arcade.key.LEFT or key == arcade.key.A:
+                t += 1
+                if on_draw.hit_y == 500:
+                    if on_draw.hit_x < 400:
+                        score  += 1
+                        print(score)
+                        r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
+                if score % 5:
+                    hit_speed *= 2
+                    radius *= 1.2
 
-        # elif key == arcade.key.RIGHT or key == arcade.key.D:
-        #     if on_draw.hit_y == 300:
-        #         if 220 > on_draw.hit_x:
-        #             r +=1
+        if t == 0:
+            if key == arcade.key.RIGHT or key == arcade.key.D:
+                t += 1
+                if on_draw.hit_y == 300:
+                    if on_draw.hit_x < 400:
+                        score += 1
+                        print(score)
+                        r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
+                if score % 5:
+                    hit_speed *= 2
+                    radius *= 1.2
 
-        # elif key == arcade.key.DOWN or key == arcade.key.S:
-        #     if on_draw.hit_y == 100:
-        #         if 220 > on_draw.hit_x:
-        #             r +=1
-        
-        if key == arcade.key.SPACE:
-            if 220 > on_draw.hit_x:
-                r = 2
-
-
+        if t == 0:
+            if key == arcade.key.DOWN or key == arcade.key.S:
+                t += 1 
+                if on_draw.hit_y == 100:
+                    if on_draw.hit_x < 400:
+                        score += 1
+                        print(score)
+                        r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
+                if score % 5:
+                    hit_speed *= 2
+                    radius *= 1.2
+            
 
 def main():
     #Set canvas then run
