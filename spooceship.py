@@ -12,11 +12,6 @@ def stars():
         star_size = random.randint(0,4)
         arcade.draw_circle_filled(ax,ay,star_size,arcade.color.WHITE,1)
 
-def flash(o):
-    if o == 0:
-        for i in range(1):
-            arcade.draw_circle_filled(0,0,1000000,arcade.color.WHITE,1)
-
 
 #Lines during the 'warp phase'
 def speed_lines(decider):
@@ -40,7 +35,7 @@ def spoceship(x,y):
     arcade.draw_circle_filled(x+50,y,window_s,arcade.color.WHITE,1)
     arcade.draw_circle_filled(x+50,y,window_s-15,arcade.color.AQUA,1)
 
-    fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
+    fire_inside_point_list = ((x-spooceship_w * 0.5, y+spooceship_l * 0.5), (x-spooceship_w*0.75,y+spooceship_l *0.25), (x-spooceship_w *0.65,y+spooceship_l* 0.1), (x-spooceship_w*0.8,y), (x-spooceship_w*0.7,y-spooceship_l*0.15), (x-spooceship_w*0.625,y-spooceship_l*0.25), (x-spooceship_w*0.6,y-spooceship_l*0.35), (x-spooceship_w*0.7,y-spooceship_l*0.45), (x-spooceship_w*0.5,y-spooceship_l*0.5))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
 
@@ -84,9 +79,7 @@ def on_draw(delta_time):
         s = 1
         SPOOD = 0
         v = 0
-        SPEED = 2
         on_draw.y = 300
-        flash(0)
         timer = 0
         on_draw.x = 200
         SPEED = 0
@@ -138,7 +131,6 @@ class MyGame(arcade.Window):
                     spooceship_l -= 0.5
                     window_s -= 0.2
                     ss += 5
-                    on_draw.x += 1
                 
                     
 
