@@ -78,11 +78,6 @@ def on_draw(delta_time):
         if score %5:
             hit_speed+=1
 
-    
-
-
-
-
 on_draw.x = 700
 on_draw.y = 400
 on_draw.hit_x = 1500
