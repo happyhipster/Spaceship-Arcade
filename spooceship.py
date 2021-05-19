@@ -3,6 +3,18 @@ import arcade
 import random
 
 from arcade.key import X
+from pyglet import window
+
+def smaller(c):
+    global spooceship_l
+    global spooceship_w
+    global window_s
+    global ss
+    if c == True:
+        spooceship_w -= 1
+        spooceship_l -= 0.5
+        window_s -= 0.2
+        ss += 5
 
 #Drawing stars in random coordinates
 def stars():
@@ -23,6 +35,7 @@ def speed_lines(decider):
 
 def planet():
     arcade.draw_circle_filled(1300,600,ss,arcade.color.RADICAL_RED,1)
+    arcade.draw_text("Press down arrow", 100, 100, arcade.color.WHITE, 30, 1000, 'left', 'calibri', False, False, 'left', "baseline")
 
 
 
@@ -52,6 +65,8 @@ timer = 1
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 
+conditional = False
+
 spooceship_w = 200
 spooceship_l = 100
 window_s = 40
@@ -62,12 +77,15 @@ def on_draw(delta_time):
     global SPEED
     global SPOOD
     global v
+    global conditional
     global s
     global timer
     arcade.start_render()
     #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
+    if spooceship_w != 160:
+        smaller(conditional)
 
     if SPEED >= 300:
         SPEED = 300
@@ -123,14 +141,12 @@ class MyGame(arcade.Window):
         global ss
         global spooceship_w
         global window_s
+        global conditional
         #this code speaks for itself (?)
         if timer == 0:
             if spooceship_w != 160:
                 if key == arcade.key.DOWN:
-                    spooceship_w -= 1
-                    spooceship_l -= 0.5
-                    window_s -= 0.2
-                    ss += 5
+                    conditional = True
                 
                     
 
