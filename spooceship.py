@@ -37,7 +37,7 @@ SPOOD = 0
 SPEED = 5
 r = arcade.color.WHITE
 score = 0
-hit_speed = 5
+hit_speed = 15
 t = 0
 radius = 20
 
@@ -75,6 +75,11 @@ def on_draw(delta_time):
         on_draw.hit_y = avoid_y_list[g]
         r = arcade.color.WHITE
 
+        if score %5:
+            hit_speed+=1
+
+    
+
 
 
 
@@ -109,10 +114,10 @@ class MyGame(arcade.Window):
                         score += 1
                         print(score)
                         r = arcade.color.GREEN
-                    else: 
-                        score -= 1
-                        print(score)
-                        r = arcade.color.RED_DEVIL
+                else: 
+                    score -= 1
+                    print(score)
+                    r = arcade.color.RED_DEVIL
                     
         if t == 0:
             if key == arcade.key.LEFT or key == arcade.key.A:
@@ -122,10 +127,10 @@ class MyGame(arcade.Window):
                         score  += 1
                         print(score)
                         r = arcade.color.GREEN
-                    else: 
-                        score -= 1
-                        print(score)
-                        r = arcade.color.RED_DEVIL
+                else: 
+                    score -= 1
+                    print(score)
+                    r = arcade.color.RED_DEVIL
 
         if t == 0:
             if key == arcade.key.RIGHT or key == arcade.key.D:
@@ -135,10 +140,10 @@ class MyGame(arcade.Window):
                         score += 1
                         print(score)
                         r = arcade.color.GREEN
-                    else: 
-                        score -= 1
-                        print(score)
-                        r = arcade.color.RED_DEVIL
+                else: 
+                    score -= 1
+                    print(score)
+                    r = arcade.color.RED_DEVIL
 
         if t == 0:
             if key == arcade.key.DOWN or key == arcade.key.S:
@@ -148,10 +153,10 @@ class MyGame(arcade.Window):
                         score += 1
                         print(score)
                         r = arcade.color.GREEN
-                    else: 
-                        score -= 1
-                        print(score)
-                        r = arcade.color.RED_DEVIL
+                else: 
+                    score -= 1
+                    print(score)
+                    r = arcade.color.RED_DEVIL
 
             
 
