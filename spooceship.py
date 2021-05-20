@@ -32,6 +32,10 @@ def spoceship(x,y):
 def hit(hit_x, hit_y):
     arcade.draw_circle_filled(hit_x,hit_y,radius, r,1)        
 
+def victory():
+    arcade.draw_circle_filled(0, 0, 1000, arcade.color.BLACK,1)
+    arcade.draw_text("YOU WIN! :3", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+
 #Declaring the variables
 SPOOD = 0
 SPEED = 5
@@ -77,6 +81,11 @@ def on_draw(delta_time):
 
         if score %5:
             hit_speed+=1
+
+        if score == 40:
+            victory()
+            spoceship(200,400)
+
 
 on_draw.x = 700
 on_draw.y = 400
