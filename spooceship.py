@@ -89,7 +89,7 @@ def on_draw(delta_time):
         if score %5:
             hit_speed+=1
 
-    if score == 10:
+    if score == 40:
         hit_speed = 0
         victory()
         spoceship(200,400)
