@@ -29,6 +29,13 @@ def spoceship(x,y):
     fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
+def speed_lines(decider):
+    if decider == 0:
+        for i in range(100):
+            x1 = random.randint(0,1501)
+            y1 = random.randint(0,751)
+            arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
+
 def hit(hit_x, hit_y):
     arcade.draw_circle_filled(hit_x,hit_y,radius, r,1)        
 
@@ -82,9 +89,12 @@ def on_draw(delta_time):
         if score %5:
             hit_speed+=1
 
-        if score == 40:
-            victory()
-            spoceship(200,400)
+    if score == 10:
+        hit_speed = 0
+        victory()
+        spoceship(200,400)
+        speed_lines(0)
+        stars()
 
 
 on_draw.x = 700
