@@ -13,8 +13,10 @@ def smaller(c):
     if c == True:
         spooceship_w -= 1
         spooceship_l -= 0.5
-        window_s -= 0.2
+        window_s -= 0.3
         ss += 5
+    else: 
+        c = False
 
 #Drawing stars in random coordinates
 def stars():
@@ -35,7 +37,7 @@ def speed_lines(decider):
 
 def planet():
     arcade.draw_circle_filled(1300,600,ss,arcade.color.RADICAL_RED,1)
-    arcade.draw_text("Press down arrow", 100, 100, arcade.color.WHITE, 30, 1000, 'left', 'calibri', False, False, 'left', "baseline")
+    arcade.draw_text("Press down arrow", 100, 100, arcade.color.WHITE, 20, 1000, 'left', 'calibri', False, False, 'left', "baseline")
 
 
 
