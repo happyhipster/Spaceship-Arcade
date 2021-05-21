@@ -39,9 +39,14 @@ def speed_lines(decider):
 def hit(hit_x, hit_y):
     arcade.draw_circle_filled(hit_x,hit_y,radius, r,1)        
 
-def victory():
-    arcade.draw_circle_filled(0, 0, 1000, arcade.color.BLACK,1)
-    arcade.draw_text("YOU WIN! :3", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+def end(hm):
+    if hm == True:
+        arcade.draw_circle_filled(0, 0, 1000, arcade.color.BLACK,1)
+        arcade.draw_text("YOU WIN! :3", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+    if hm == False:
+        arcade.draw_circle_filled(0, 0, 100000, arcade.color.BLACK,1)
+        arcade.draw_text("YOU LOST! ;-;", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+
 
 #Declaring the variables
 SPOOD = 0
@@ -91,10 +96,14 @@ def on_draw(delta_time):
 
     if score == 40:
         hit_speed = 0
-        victory()
+        end(True)
         spoceship(200,400)
         speed_lines(0)
         stars()
+
+    if score == -5:
+        hit_speed = 0
+        end(False)
 
 
 on_draw.x = 700
@@ -128,6 +137,10 @@ class MyGame(arcade.Window):
                         score += 1
                         print(score)
                         r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
@@ -141,6 +154,10 @@ class MyGame(arcade.Window):
                         score  += 1
                         print(score)
                         r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
@@ -154,6 +171,10 @@ class MyGame(arcade.Window):
                         score += 1
                         print(score)
                         r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
@@ -167,6 +188,10 @@ class MyGame(arcade.Window):
                         score += 1
                         print(score)
                         r = arcade.color.GREEN
+                    else: 
+                        score -= 1
+                        print(score)
+                        r = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
