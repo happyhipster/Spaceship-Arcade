@@ -1,10 +1,8 @@
-#importing the 'arcade' package and 'random' package
+#Importing the 'arcade' package and 'random' package
 import arcade
 import random
 
-from arcade.key import X
-from pyglet import window
-
+#Function to change size of the spaceship and the planet
 def smaller(c):
     global spooceship_l
     global spooceship_w
@@ -27,7 +25,7 @@ def stars():
         arcade.draw_circle_filled(ax,ay,star_size,arcade.color.WHITE,1)
 
 
-#Lines during the 'warp phase'
+#Lines during the 'hyper space'
 def speed_lines(decider):
     if decider == 0:
         for i in range(100):
@@ -35,6 +33,7 @@ def speed_lines(decider):
             y1 = random.randint(0,751)
             arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
 
+#Drawing of the planet
 def planet():
     arcade.draw_circle_filled(1300,600,ss,arcade.color.RADICAL_RED,1)
     arcade.draw_text("Press down arrow", 100, 100, arcade.color.WHITE, 20, 1000, 'left', 'calibri', False, False, 'left', "baseline")
@@ -73,9 +72,9 @@ spooceship_w = 200
 spooceship_l = 100
 window_s = 40
 
-#Function for animaring
+#Function for animating
 def on_draw(delta_time):
-    #access global variables in this function
+    #Access global variables in this function
     global SPEED
     global SPOOD
     global v
@@ -86,6 +85,8 @@ def on_draw(delta_time):
     #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
+
+    #Conditions to carry out the animation
     if spooceship_w != 160:
         smaller(conditional)
 
@@ -130,30 +131,27 @@ on_draw.x = -200
 on_draw.y = 0
 
 
+#class of the game window
 class MyGame(arcade.Window):
-    #setting the screen
+    #Setting the screen
     def __init__(self,width,height,title):
 
         super().__init__(width, height, title)
         self.set_mouse_visible(False)
         arcade.set_background_color(arcade.color.BLACK)
     
+    #Function to recognise user input
     def on_key_press(self, key, modifiers):
         global spooceship_l 
         global ss
         global spooceship_w
         global window_s
         global conditional
-        #this code speaks for itself (?)
         if timer == 0:
             if spooceship_w != 160:
                 if key == arcade.key.DOWN:
                     conditional = True
                 
-                    
-
-    
-    
 def main():
     #Set canvas then run
     MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
