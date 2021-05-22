@@ -54,7 +54,7 @@ SPEED = 5
 projectile_colour = arcade.color.WHITE
 score = 0
 hit_speed = 15
-t = 0
+space_count = 0
 radius = 20
 
 avoid_y_list = [100, 300, 500, 700]
@@ -67,7 +67,7 @@ WINDOW_LENGTH = 1500
 def on_draw(delta_time):
     #access global variables in this function
     global SPEED
-    global t
+    global space_count
     global score
     global hit_speed
     global radius
@@ -83,12 +83,12 @@ def on_draw(delta_time):
 
     if on_draw.hit_x <= 10:
         print(score)
-        t = 0
+        space_count = 0
         if projectile_colour == arcade.color.WHITE:
             score -= 1
         on_draw.hit_x = 1500
-        g = random.randint(0,3)
-        on_draw.hit_y = avoid_y_list[g]
+        place_generator = random.randint(0,3)
+        on_draw.hit_y = avoid_y_list[place_generator]
         projectile_colour = arcade.color.WHITE
 
         if score %5:
@@ -109,8 +109,8 @@ def on_draw(delta_time):
 on_draw.x = 700
 on_draw.y = 400
 on_draw.hit_x = 1500
-g = random.randint(0,3)
-on_draw.hit_y = avoid_y_list[g]
+place_generator = random.randint(0,3)
+on_draw.hit_y = avoid_y_list[place_generator]
 
 class MyGame(arcade.Window):
     #setting the screen
@@ -123,14 +123,14 @@ class MyGame(arcade.Window):
     #function for user input
     def on_key_press(self, key, modifiers):
         global score
-        global t
+        global space_count
         global hit_speed
         global radius
         global projectile_colour
         #this code speaks for itself (?)
-        if t == 0:
+        if space_count == 0:
             if key == arcade.key.UP or key == arcade.key.W:
-                t += 1
+                space_count += 1
                 if on_draw.hit_y == 700:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
@@ -145,9 +145,9 @@ class MyGame(arcade.Window):
                     print(score)
                     projectile_colour = arcade.color.RED_DEVIL
                     
-        if t == 0:
+        if space_count == 0:
             if key == arcade.key.LEFT or key == arcade.key.A:
-                t += 1
+                space_count += 1
                 if on_draw.hit_y == 500:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score  += 1
@@ -162,9 +162,9 @@ class MyGame(arcade.Window):
                     print(score)
                     projectile_colour = arcade.color.RED_DEVIL
 
-        if t == 0:
+        if space_count == 0:
             if key == arcade.key.RIGHT or key == arcade.key.D:
-                t += 1
+                space_count += 1
                 if on_draw.hit_y == 300:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
@@ -179,9 +179,9 @@ class MyGame(arcade.Window):
                     print(score)
                     projectile_colour= arcade.color.RED_DEVIL
 
-        if t == 0:
+        if space_count == 0:
             if key == arcade.key.DOWN or key == arcade.key.S:
-                t += 1 
+                space_count += 1 
                 if on_draw.hit_y == 100:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
