@@ -37,7 +37,7 @@ def speed_lines(decider):
             arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
 
 def hit(hit_x, hit_y):
-    arcade.draw_circle_filled(hit_x,hit_y,radius, r,1)        
+    arcade.draw_circle_filled(hit_x,hit_y,radius, projectile_colour,1)        
 
 def end(hm):
     if hm == True:
@@ -51,7 +51,7 @@ def end(hm):
 #Declaring the variables
 SPOOD = 0
 SPEED = 5
-r = arcade.color.WHITE
+projectile_colour = arcade.color.WHITE
 score = 0
 hit_speed = 15
 t = 0
@@ -71,7 +71,7 @@ def on_draw(delta_time):
     global score
     global hit_speed
     global radius
-    global r
+    global projectile_colour
     arcade.start_render()
     #Calling functions to draw scenery
     stars()
@@ -84,12 +84,12 @@ def on_draw(delta_time):
     if on_draw.hit_x <= 10:
         print(score)
         t = 0
-        if r == arcade.color.WHITE:
+        if projectile_colour == arcade.color.WHITE:
             score -= 1
         on_draw.hit_x = 1500
         g = random.randint(0,3)
         on_draw.hit_y = avoid_y_list[g]
-        r = arcade.color.WHITE
+        projectile_colour = arcade.color.WHITE
 
         if score %5:
             hit_speed+=1
@@ -115,7 +115,6 @@ on_draw.hit_y = avoid_y_list[g]
 class MyGame(arcade.Window):
     #setting the screen
     def __init__(self,width,height,title):
-
         super().__init__(width, height, title)
         self.set_mouse_visible(False)
         arcade.set_background_color(arcade.color.BLACK)
@@ -127,75 +126,75 @@ class MyGame(arcade.Window):
         global t
         global hit_speed
         global radius
-        global r
+        global projectile_colour
         #this code speaks for itself (?)
         if t == 0:
             if key == arcade.key.UP or key == arcade.key.W:
                 t += 1
                 if on_draw.hit_y == 700:
-                    if on_draw.hit_x < 400:
+                    if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
                         print(score)
-                        r = arcade.color.GREEN
+                        projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
                         print(score)
-                        r = arcade.color.RED_DEVIL
+                        projectile_colour = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
-                    r = arcade.color.RED_DEVIL
+                    projectile_colour = arcade.color.RED_DEVIL
                     
         if t == 0:
             if key == arcade.key.LEFT or key == arcade.key.A:
                 t += 1
                 if on_draw.hit_y == 500:
-                    if on_draw.hit_x < 400:
+                    if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score  += 1
                         print(score)
-                        r = arcade.color.GREEN
+                        projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
                         print(score)
-                        r = arcade.color.RED_DEVIL
+                        projectile_colour = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
-                    r = arcade.color.RED_DEVIL
+                    projectile_colour = arcade.color.RED_DEVIL
 
         if t == 0:
             if key == arcade.key.RIGHT or key == arcade.key.D:
                 t += 1
                 if on_draw.hit_y == 300:
-                    if on_draw.hit_x < 400:
+                    if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
                         print(score)
-                        r = arcade.color.GREEN
+                        projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
                         print(score)
-                        r = arcade.color.RED_DEVIL
+                        projectile_colour= arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
-                    r = arcade.color.RED_DEVIL
+                    projectile_colour= arcade.color.RED_DEVIL
 
         if t == 0:
             if key == arcade.key.DOWN or key == arcade.key.S:
                 t += 1 
                 if on_draw.hit_y == 100:
-                    if on_draw.hit_x < 400:
+                    if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
                         print(score)
-                        r = arcade.color.GREEN
+                        projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
                         print(score)
-                        r = arcade.color.RED_DEVIL
+                        projectile_colour = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
                     print(score)
-                    r = arcade.color.RED_DEVIL
+                    projectile_colour = arcade.color.RED_DEVIL
 
             
 
