@@ -74,11 +74,11 @@ def on_draw(delta_time):
     global projectile_colour
     arcade.start_render()
     #Calling functions to draw scenery
-    target()
     stars()
     spoceship(on_draw.x, on_draw.y)
     hit(on_draw.hit_x, on_draw.hit_y)
     on_draw.hit_x -= hit_speed
+    target()
     
     arcade.draw_text(str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
@@ -146,7 +146,6 @@ class MyGame(arcade.Window):
                     print(score)
                     projectile_colour = arcade.color.RED_DEVIL
                     
-        if space_count == 0:
             if key == arcade.key.LEFT or key == arcade.key.A:
                 space_count += 1
                 if on_draw.hit_y == 500:
@@ -163,7 +162,6 @@ class MyGame(arcade.Window):
                     print(score)
                     projectile_colour = arcade.color.RED_DEVIL
 
-        if space_count == 0:
             if key == arcade.key.RIGHT or key == arcade.key.D:
                 space_count += 1
                 if on_draw.hit_y == 300:
@@ -180,7 +178,6 @@ class MyGame(arcade.Window):
                     print(score)
                     projectile_colour= arcade.color.RED_DEVIL
 
-        if space_count == 0:
             if key == arcade.key.DOWN or key == arcade.key.S:
                 space_count += 1 
                 if on_draw.hit_y == 100:
