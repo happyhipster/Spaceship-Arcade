@@ -74,11 +74,12 @@ def on_draw(delta_time):
     global projectile_colour
     arcade.start_render()
     #Calling functions to draw scenery
+    target()
     stars()
     spoceship(on_draw.x, on_draw.y)
     hit(on_draw.hit_x, on_draw.hit_y)
     on_draw.hit_x -= hit_speed
-    target()
+    
     arcade.draw_text(str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
     if on_draw.hit_x <= 10:
