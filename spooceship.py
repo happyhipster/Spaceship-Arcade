@@ -19,14 +19,14 @@ def stars():
 
 #Drawing the spooceship
 def spoceship(x,y):
-    arcade.draw_rectangle_filled(x, y, 200, 100, arcade.color.RED)
-    arcade.draw_triangle_filled(x, y+50, x-150, y+150, x-100, y+50, arcade.color.DARK_RED)
-    arcade.draw_triangle_filled(x, y-50, x-150, y-150, x-100, y-50, arcade.color.DARK_RED)
-    arcade.draw_triangle_filled(x+100, y+50, x+200, y, x+100, y-50, arcade.color.BLUE_SAPPHIRE)
-    arcade.draw_circle_filled(x+50,y,40,arcade.color.WHITE,1)
-    arcade.draw_circle_filled(x+50,y,25,arcade.color.AQUA,1)
+    arcade.draw_rectangle_filled(x, y, spooceship_w, spooceship_l, arcade.color.RED)
+    arcade.draw_triangle_filled(x, y+spooceship_l/2, x-spooceship_w*0.75, y+spooceship_l*1.5, x-spooceship_w/2, y+spooceship_l/2, arcade.color.DARK_RED)
+    arcade.draw_triangle_filled(x, y-spooceship_l/2, x-spooceship_w*0.75, y-spooceship_l*1.5, x-spooceship_w/2, y-spooceship_l/2, arcade.color.DARK_RED)
+    arcade.draw_triangle_filled(x+spooceship_w/2, y+spooceship_l/2, x+spooceship_w, y, x+spooceship_w/2, y-spooceship_l/2, arcade.color.BLUE_SAPPHIRE)
+    arcade.draw_circle_filled(x+50,y,window_s,arcade.color.WHITE,1)
+    arcade.draw_circle_filled(x+50,y,window_s-15,arcade.color.AQUA,1)
 
-    fire_inside_point_list = ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
+    fire_inside_point_list = ((x-spooceship_w * 0.5, y+spooceship_l * 0.5), (x-spooceship_w*0.75,y+spooceship_l *0.25), (x-spooceship_w *0.65,y+spooceship_l* 0.1), (x-spooceship_w*0.8,y), (x-spooceship_w*0.7,y-spooceship_l*0.15), (x-spooceship_w*0.625,y-spooceship_l*0.25), (x-spooceship_w*0.6,y-spooceship_l*0.35), (x-spooceship_w*0.7,y-spooceship_l*0.45), (x-spooceship_w*0.5,y-spooceship_l*0.5))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
 def speed_lines(decider):
@@ -62,6 +62,9 @@ avoid_y_list = [100, 300, 500, 700]
 WINDOW_HEIGHT = 750
 WINDOW_LENGTH = 1500
 
+spooceship_w = 200
+spooceship_l = 100
+window_s = 40
 
 #Function for animating
 def on_draw(delta_time):
