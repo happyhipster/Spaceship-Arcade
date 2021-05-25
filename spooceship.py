@@ -97,12 +97,14 @@ def on_draw(delta_time):
 
     if score == 40:
         hit_speed = 0
+        space_count = 100
         end(True)
         spoceship(200,400)
         speed_lines(0)
         stars()
 
     if score == -5:
+        space_count = 100
         hit_speed = 0
         end(False)
 
