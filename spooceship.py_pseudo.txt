@@ -1,0 +1,395 @@
+#NOTES MAKE THE GAME MECHANIC COLLECTABLES DURING CLASS OR SMTHN IDK MAAAAAN
+
+#importing the 'arcade' package and 'random' package
+
+IMPORT arcade
+
+IMPORT random
+
+
+
+DEFINE FUNCTION target():
+
+    arcade.draw_circle_filled(200,100,40,(235,64,64),1)
+
+    arcade.draw_circle_filled(200,300,40,(235,64,64),1)
+
+    arcade.draw_circle_filled(200,500,40,(235,64,64),1)
+
+    arcade.draw_circle_filled(200,700,40,(235,64,64),1)
+
+
+
+#Drawing stars IN random coordinates
+
+DEFINE FUNCTION stars():
+
+    FOR i IN range(100):
+
+        SET ax TO random.randint(0,1501)
+
+        SET ay TO random.randint(0,751)
+
+        arcade.draw_circle_filled(ax,ay,1,arcade.color.WHITE,1)
+
+
+
+
+
+#Drawing the spooceship
+
+DEFINE FUNCTION spoceship(x,y):
+
+    arcade.draw_rectangle_filled(x, y, 200, 100, arcade.color.RED)
+
+    arcade.draw_triangle_filled(x, y+50, x-150, y+150, x-100, y+50, arcade.color.DARK_RED)
+
+    arcade.draw_triangle_filled(x, y-50, x-150, y-150, x-100, y-50, arcade.color.DARK_RED)
+
+    arcade.draw_triangle_filled(x+100, y+50, x+200, y, x+100, y-50, arcade.color.BLUE_SAPPHIRE)
+
+    arcade.draw_circle_filled(x+50,y,40,arcade.color.WHITE,1)
+
+    arcade.draw_circle_filled(x+50,y,25,arcade.color.AQUA,1)
+
+
+
+    SET fire_inside_point_list TO ((x-100,y+50), (x-150,y+25), (x-130,y+10), (x-160,y), (x-140,y-15), (x-125,y-25), (x-120,y-35), (x-140,y-45), (x-100,y-50))
+
+    arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
+
+
+
+DEFINE FUNCTION speed_lines(decider):
+
+    IF decider EQUALS 0:
+
+        FOR i IN range(100):
+
+            SET x1 TO random.randint(0,1501)
+
+            SET y1 TO random.randint(0,751)
+
+            arcade.draw_line(x1, y1, x1+50 ,y1, arcade.color.WHITE_SMOKE, 2)
+
+
+
+DEFINE FUNCTION hit(hit_x, hit_y):
+
+    arcade.draw_circle_filled(hit_x,hit_y,radius, projectile_colour,1)        
+
+
+
+DEFINE FUNCTION end(hm):
+
+    IF hm EQUALS True:
+
+        arcade.draw_circle_filled(0, 0, 1000, arcade.color.BLACK,1)
+
+        arcade.draw_text("YOU WIN! :3", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+
+    IF hm EQUALS False:
+
+        arcade.draw_circle_filled(0, 0, 100000, arcade.color.BLACK,1)
+
+        arcade.draw_text("YOU LOST! ;-;", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+
+
+
+
+
+#Declaring the variables
+
+SET SPOOD TO 0
+
+SET SPEED TO 5
+
+SET projectile_colour TO arcade.color.WHITE
+
+SET score TO 0
+
+SET hit_speed TO 15
+
+SET space_count TO 0
+
+SET radius TO 20
+
+
+
+SET avoid_y_list TO [100, 300, 500, 700]
+
+
+
+SET WINDOW_HEIGHT TO 750
+
+SET WINDOW_LENGTH TO 1500
+
+
+
+
+
+#Function FOR animating
+
+DEFINE FUNCTION on_draw(delta_time):
+
+    #access global variables IN this function
+
+    global SPEED
+
+    global space_count
+
+    global score
+
+    global hit_speed
+
+    global radius
+
+    global projectile_colour
+
+    arcade.start_render()
+
+    #Calling functions to draw scenery
+
+    stars()
+
+    spoceship(on_draw.x, on_draw.y)
+
+    hit(on_draw.hit_x, on_draw.hit_y)
+
+    on_draw.hit_x -= hit_speed
+
+    target()
+
+    
+
+    arcade.draw_text(str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+
+
+
+    IF on_draw.hit_x <= 10:
+
+        OUTPUT(score)
+
+        SET space_count TO 0
+
+        IF projectile_colour EQUALS arcade.color.WHITE:
+
+            score -= 1
+
+        SET on_draw.hit_x TO 1500
+
+        SET place_generator TO random.randint(0,3)
+
+        SET on_draw.hit_y TO avoid_y_list[place_generator]
+
+        SET projectile_colour TO arcade.color.WHITE
+
+
+
+        IF score %5:
+
+            hit_speed+=1
+
+
+
+    IF score EQUALS 40:
+
+        SET hit_speed TO 0
+
+        SET space_count TO 100
+
+        end(True)
+
+        spoceship(200,400)
+
+        speed_lines(0)
+
+        stars()
+
+
+
+    IF score EQUALS -10:
+
+        SET space_count TO 100
+
+        SET hit_speed TO 0
+
+        end(False)
+
+
+
+
+
+SET on_draw.x TO 700
+
+SET on_draw.y TO 400
+
+SET on_draw.hit_x TO 1500
+
+SET place_generator TO random.randint(0,3)
+
+SET on_draw.hit_y TO avoid_y_list[place_generator]
+
+
+
+DEFINE CLASS MyGame(arcade.Window):
+
+    #setting the screen
+
+    DEFINE FUNCTION __init__(self,width,height,title):
+
+        super().__init__(width, height, title)
+
+        self.set_mouse_visible(False)
+
+        arcade.set_background_color(arcade.color.BLACK)
+
+
+
+    
+
+    #function FOR user INPUT
+
+    DEFINE FUNCTION on_key_press(self, key, modifiers):
+
+        global score
+
+        global space_count
+
+        global hit_speed
+
+        global radius
+
+        global projectile_colour
+
+        #this code speaks FOR itself (?)
+
+        IF space_count EQUALS 0:
+
+            IF key EQUALS arcade.key.UP or key EQUALS arcade.key.W:
+
+                space_count += 1
+
+                IF on_draw.hit_y EQUALS 700:
+
+                    IF on_draw.hit_x > 100 and on_draw.hit_x < 300:
+
+                        score += 1
+
+                        SET projectile_colour TO arcade.color.GREEN
+
+                    ELSE: 
+
+                        score -= 1
+
+                        SET projectile_colour TO arcade.color.RED_DEVIL
+
+                ELSE: 
+
+                    score -= 1
+
+                    SET projectile_colour TO arcade.color.RED_DEVIL
+
+                    
+
+            IF key EQUALS arcade.key.LEFT or key EQUALS arcade.key.A:
+
+                space_count += 1
+
+                IF on_draw.hit_y EQUALS 500:
+
+                    IF on_draw.hit_x > 100 and on_draw.hit_x < 300:
+
+                        score  += 1
+
+                        SET projectile_colour TO arcade.color.GREEN
+
+                    ELSE: 
+
+                        score -= 1
+
+                        SET projectile_colour TO arcade.color.RED_DEVIL
+
+                ELSE: 
+
+                    score -= 1
+
+                    SET projectile_colour TO arcade.color.RED_DEVIL
+
+
+
+            IF key EQUALS arcade.key.RIGHT or key EQUALS arcade.key.D:
+
+                space_count += 1
+
+                IF on_draw.hit_y EQUALS 300:
+
+                    IF on_draw.hit_x > 100 and on_draw.hit_x < 300:
+
+                        score += 1
+
+                        SET projectile_colour TO arcade.color.GREEN
+
+                    ELSE: 
+
+                        score -= 1
+
+                        OUTPUT(score)
+
+                        projectile_colour= arcade.color.RED_DEVIL
+
+                ELSE: 
+
+                    score -= 1
+
+                    projectile_colour= arcade.color.RED_DEVIL
+
+
+
+            IF key EQUALS arcade.key.DOWN or key EQUALS arcade.key.S:
+
+                space_count += 1 
+
+                IF on_draw.hit_y EQUALS 100:
+
+                    IF on_draw.hit_x > 100 and on_draw.hit_x < 300:
+
+                        score += 1
+
+                        SET projectile_colour TO arcade.color.GREEN
+
+                    ELSE: 
+
+                        score -= 1
+
+                        SET projectile_colour TO arcade.color.RED_DEVIL
+
+                ELSE: 
+
+                    score -= 1
+
+                    SET projectile_colour TO arcade.color.RED_DEVIL
+
+
+
+            
+
+
+
+DEFINE FUNCTION main():
+
+    #Set canvas then run
+
+    MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
+
+    arcade.schedule(on_draw, 1/60)
+
+    arcade.run()    
+
+
+
+
+
+#Call main function to run
+
+main()
