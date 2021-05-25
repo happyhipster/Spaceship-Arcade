@@ -103,7 +103,7 @@ def on_draw(delta_time):
         speed_lines(0)
         stars()
 
-    if score == -5:
+    if score == -10:
         space_count = 100
         hit_speed = 0
         end(False)
@@ -137,15 +137,12 @@ class MyGame(arcade.Window):
                 if on_draw.hit_y == 700:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
-                        print(score)
                         projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
-                        print(score)
                         projectile_colour = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
-                    print(score)
                     projectile_colour = arcade.color.RED_DEVIL
                     
             if key == arcade.key.LEFT or key == arcade.key.A:
@@ -153,15 +150,12 @@ class MyGame(arcade.Window):
                 if on_draw.hit_y == 500:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score  += 1
-                        print(score)
                         projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
-                        print(score)
                         projectile_colour = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
-                    print(score)
                     projectile_colour = arcade.color.RED_DEVIL
 
             if key == arcade.key.RIGHT or key == arcade.key.D:
@@ -169,7 +163,6 @@ class MyGame(arcade.Window):
                 if on_draw.hit_y == 300:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
-                        print(score)
                         projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
@@ -177,7 +170,6 @@ class MyGame(arcade.Window):
                         projectile_colour= arcade.color.RED_DEVIL
                 else: 
                     score -= 1
-                    print(score)
                     projectile_colour= arcade.color.RED_DEVIL
 
             if key == arcade.key.DOWN or key == arcade.key.S:
@@ -185,15 +177,12 @@ class MyGame(arcade.Window):
                 if on_draw.hit_y == 100:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
                         score += 1
-                        print(score)
                         projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
-                        print(score)
                         projectile_colour = arcade.color.RED_DEVIL
                 else: 
                     score -= 1
-                    print(score)
                     projectile_colour = arcade.color.RED_DEVIL
 
             
