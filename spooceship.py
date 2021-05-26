@@ -25,7 +25,7 @@ def stars():
         arcade.draw_circle_filled(ax,ay,star_size,arcade.color.WHITE,1)
 
 
-#Lines during the 'hyper space'
+#Drawing the lines during the 'hyper space' process
 def speed_lines(decider):
     if decider == 0:
         for i in range(100):
@@ -40,7 +40,7 @@ def planet():
 
 
 
-#Drawing the spooceship
+#Drawing the spaceship
 def spoceship(x,y):
     arcade.draw_rectangle_filled(x, y, spooceship_w, spooceship_l, arcade.color.RED)
     arcade.draw_triangle_filled(x, y+spooceship_l/2, x-spooceship_w*0.75, y+spooceship_l*1.5, x-spooceship_w/2, y+spooceship_l/2, arcade.color.DARK_RED)
@@ -82,7 +82,7 @@ def on_draw(delta_time):
     global s
     global timer
     arcade.start_render()
-    #Calling functions to draw scenery
+    #Calling functions to draw the aspects of the animation
     stars()
     spoceship(on_draw.x, on_draw.y)
 
@@ -133,7 +133,7 @@ on_draw.y = 0
 
 #class of the game window
 class MyGame(arcade.Window):
-    #Setting the screen
+    #Setting up the screen
     def __init__(self,width,height,title):
 
         super().__init__(width, height, title)
