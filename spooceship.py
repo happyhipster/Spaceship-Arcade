@@ -95,6 +95,12 @@ def on_draw(delta_time):
             spooceship_l -= 2
             spooceship_w -= 4
             window_s -= 1.2
+            if spooceship_l <= 80:
+                spooceship_l = 80
+                spooceship_w = 180
+                window_s = 20
+                
+
         on_draw.hit_x = 1500
         place_generator = random.randint(0,3)
         on_draw.hit_y = avoid_y_list[place_generator]
@@ -110,6 +116,7 @@ def on_draw(delta_time):
         spoceship(200,400)
         speed_lines(0)
         stars()
+        on_draw.hit_x = 20000
 
     if score == -5:
         space_count = 100
@@ -231,6 +238,12 @@ class MyGame(arcade.Window):
                     spooceship_l -= 2
                     spooceship_w -= 4
                     window_s -= 1.2
+
+            if key == arcade.key.SPACE:
+                score = 40
+
+            if key == arcade.key.A:
+                score = -5
 
             
 
