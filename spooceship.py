@@ -75,6 +75,8 @@ def on_draw(delta_time):
     global hit_speed
     global radius
     global projectile_colour
+    global spooceship_l
+    global spooceship_w
     arcade.start_render()
     #Calling functions to draw scenery
     stars()
@@ -90,6 +92,8 @@ def on_draw(delta_time):
         space_count = 0
         if projectile_colour == arcade.color.WHITE:
             score -= 1
+            spooceship_l -= 2
+            spooceship_w -= 4
         on_draw.hit_x = 1500
         place_generator = random.randint(0,3)
         on_draw.hit_y = avoid_y_list[place_generator]
@@ -106,7 +110,7 @@ def on_draw(delta_time):
         speed_lines(0)
         stars()
 
-    if score == -10:
+    if score == -5:
         space_count = 100
         hit_speed = 0
         end(False)
@@ -133,6 +137,8 @@ class MyGame(arcade.Window):
         global hit_speed
         global radius
         global projectile_colour
+        global spooceship_w
+        global spooceship_l
         #this code speaks for itself (?)
         if space_count == 0:
             if key == arcade.key.UP or key == arcade.key.W:
@@ -144,9 +150,13 @@ class MyGame(arcade.Window):
                     else: 
                         score -= 1
                         projectile_colour = arcade.color.RED_DEVIL
+                        spooceship_l -= 2
+                        spooceship_w -= 4
                 else: 
                     score -= 1
                     projectile_colour = arcade.color.RED_DEVIL
+                    spooceship_l -= 2
+                    spooceship_w -= 4
                     
             if key == arcade.key.LEFT or key == arcade.key.A:
                 space_count += 1
@@ -157,9 +167,13 @@ class MyGame(arcade.Window):
                     else: 
                         score -= 1
                         projectile_colour = arcade.color.RED_DEVIL
+                        spooceship_l -= 2
+                        spooceship_w -= 4
                 else: 
                     score -= 1
                     projectile_colour = arcade.color.RED_DEVIL
+                    spooceship_l -= 2
+                    spooceship_w -= 4
 
             if key == arcade.key.RIGHT or key == arcade.key.D:
                 space_count += 1
@@ -169,11 +183,15 @@ class MyGame(arcade.Window):
                         projectile_colour = arcade.color.GREEN
                     else: 
                         score -= 1
-                        print(score)
                         projectile_colour= arcade.color.RED_DEVIL
+                        spooceship_l -= 2
+                        spooceship_w -= 4
+
                 else: 
                     score -= 1
                     projectile_colour= arcade.color.RED_DEVIL
+                    spooceship_l -= 2
+                    spooceship_w -= 4
 
             if key == arcade.key.DOWN or key == arcade.key.S:
                 space_count += 1 
@@ -184,9 +202,13 @@ class MyGame(arcade.Window):
                     else: 
                         score -= 1
                         projectile_colour = arcade.color.RED_DEVIL
+                        spooceship_l -= 2
+                        spooceship_w -= 4
                 else: 
                     score -= 1
                     projectile_colour = arcade.color.RED_DEVIL
+                    spooceship_l -= 2
+                    spooceship_w -= 4
 
             
 
