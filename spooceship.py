@@ -7,12 +7,12 @@ def smaller(c):
     global spooceship_l
     global spooceship_w
     global window_s
-    global ss
+    global circle_size
     if c == True:
         spooceship_w -= 1
         spooceship_l -= 0.5
         window_s -= 0.3
-        ss += 5
+        circle_size += 5
     else: 
         c = False
 
@@ -35,7 +35,7 @@ def speed_lines(decider):
 
 #Drawing of the planet
 def planet():
-    arcade.draw_circle_filled(1300,600,ss,arcade.color.RADICAL_RED,1)
+    arcade.draw_circle_filled(1300,600,circle_size,arcade.color.RADICAL_RED,1)
     arcade.draw_text("Press down arrow", 100, 100, arcade.color.WHITE, 20, 1000, 'left', 'calibri', False, False, 'left', "baseline")
 
 
@@ -56,9 +56,9 @@ def spoceship(x,y):
 #Declaring the variables
 SPOOD = 1
 SPEED = 5
-v = 2
-s = 10
-ss = 50
+SPOOD_change = 2
+SPEED_change = 10
+circle_size = 50
 
 timer = 1
 
@@ -77,9 +77,9 @@ def on_draw(delta_time):
     #Access global variables in this function
     global SPEED
     global SPOOD
-    global v
+    global SPOOD_change
     global conditional
-    global s
+    global SPEED_change 
     global timer
     arcade.start_render()
     #Calling functions to draw the aspects of the animation
@@ -97,9 +97,9 @@ def on_draw(delta_time):
         print(timer)
     if timer == 100:
         speed_lines(10)
-        s = 1
+        SPEED_change  = 1
         SPOOD = 0
-        v = 0
+        SPOOD_change = 0
         on_draw.y = 300
         timer = 0
         on_draw.x = 200
@@ -116,15 +116,15 @@ def on_draw(delta_time):
     #conditional: if on_draw.x is more than the WINDOW_LENGTH+150 (once it reaches the end of the window, the spooceship goes back to the start again)
     if on_draw.x > WINDOW_LENGTH + 150:
         on_draw.x = -250
-        SPEED *= s
+        SPEED *= SPEED_change 
 
     #conditional: if on_draw.y is more than WINDOW_HEIGHT-700, change SPOOD by -2
     if on_draw.y > WINDOW_HEIGHT-400:
-        SPOOD -= v
+        SPOOD -= SPOOD_change
 
     #conditional: else if on_draw.y is less than 700, change SPOOD by 2
     elif on_draw.y < 400:
-        SPOOD += v
+        SPOOD += SPOOD_change
 
 
 on_draw.x = -200
@@ -143,7 +143,7 @@ class MyGame(arcade.Window):
     #Function to recognise user input
     def on_key_press(self, key, modifiers):
         global spooceship_l 
-        global ss
+        global circle_size
         global spooceship_w
         global window_s
         global conditional
