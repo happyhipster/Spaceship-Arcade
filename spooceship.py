@@ -102,6 +102,9 @@ def on_draw(delta_time):
     target()
     
     arcade.draw_text("Score: " + str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+    #code below was used for debugging
+    # arcade.draw_text(str(spooceship_l), 100, 400, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+    # arcade.draw_text(str(spooceship_w), 100, 600, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
     if on_draw.hit_x <= 10:
         space_count = 0
@@ -111,10 +114,6 @@ def on_draw(delta_time):
             spooceship_l -= 2
             spooceship_w -= 4
             window_s -= 1.2
-            if spooceship_l <= 80:
-                spooceship_l = 80
-                spooceship_w = 180
-                window_s = 20
         on_draw.hit_x = 1500
         place_generator = random.randint(0,3)
         on_draw.hit_y = avoid_y_list[place_generator]
@@ -138,6 +137,11 @@ def on_draw(delta_time):
         space_count = 5
         hit_speed = 0
         end(False)
+    
+    if spooceship_w <= 164:
+        spooceship_l = 82
+        spooceship_w = 164
+        window_s = 29.2
 
 
 on_draw.x = 700
@@ -185,10 +189,6 @@ class MyGame(arcade.Window):
                         spooceship_w -= 4
                         window_s -= 1.2
                         misses += 1
-                        if spooceship_l <= 80:
-                            spooceship_l = 80
-                            spooceship_w = 180
-                            window_s = 20
                 else: 
                     score -= 1
                     projectile_colour = arcade.color.RED_DEVIL
@@ -196,10 +196,7 @@ class MyGame(arcade.Window):
                     spooceship_w -= 4
                     window_s -= 1.2
                     misses += 1
-                    if spooceship_l <= 80:
-                        spooceship_l = 80
-                        spooceship_w = 180
-                        window_s = 20
+
                     
             if key == arcade.key.LEFT or key == arcade.key.A:
                 space_count += 1
@@ -218,10 +215,6 @@ class MyGame(arcade.Window):
                         spooceship_w -= 4
                         window_s -= 1.2
                         misses += 1
-                        if spooceship_l <= 80:
-                            spooceship_l = 80
-                            spooceship_w = 180
-                            window_s = 20
                 else: 
                     score -= 1
                     projectile_colour = arcade.color.RED_DEVIL
@@ -229,10 +222,7 @@ class MyGame(arcade.Window):
                     spooceship_w -= 4
                     window_s -= 1.2
                     misses += 1
-                    if spooceship_l <= 80:
-                        spooceship_l = 80
-                        spooceship_w = 180
-                        window_s = 20
+
 
             if key == arcade.key.RIGHT or key == arcade.key.D:
                 space_count += 1
@@ -251,11 +241,6 @@ class MyGame(arcade.Window):
                         spooceship_w -= 4
                         window_s -= 1.2
                         misses += 1
-                        if spooceship_l <= 80:
-                            spooceship_l = 80
-                            spooceship_w = 180
-                            window_s = 20
-
                 else: 
                     score -= 1
                     projectile_colour= arcade.color.RED_DEVIL
@@ -263,10 +248,6 @@ class MyGame(arcade.Window):
                     spooceship_w -= 4
                     window_s -= 1.2
                     misses += 1
-                    if spooceship_l <= 80:
-                        spooceship_l = 80
-                        spooceship_w = 180
-                        window_s = 20
 
             if key == arcade.key.DOWN or key == arcade.key.S:
                 space_count += 1 
@@ -285,10 +266,6 @@ class MyGame(arcade.Window):
                         spooceship_w -= 4
                         window_s -= 1.2
                         misses += 1
-                        if spooceship_l <= 80:
-                            spooceship_l = 80
-                            spooceship_w = 180
-                            window_s = 20
                 else: 
                     score -= 1
                     projectile_colour = arcade.color.RED_DEVIL
@@ -296,11 +273,6 @@ class MyGame(arcade.Window):
                     spooceship_w -= 4
                     window_s -= 1.2
                     misses += 1
-                    if spooceship_l <= 80:
-                        spooceship_l = 80
-                        spooceship_w = 180
-                        window_s = 20
-
 
             #user control for debugging
             if key == arcade.key.SPACE:
