@@ -1,5 +1,5 @@
 #importing the 'arcade' package and 'random' package
-#from playsound import playsound
+from playsound import playsound
 import arcade
 import random
 
@@ -278,17 +278,15 @@ class MyGame(arcade.Window):
 
             if key == arcade.key.P:
                 score = -5
-
-            if key == arcade.key.O:
-                hit_speed = 0
+                
                 
             
-
+playsound('C:\Users\Andy\Downloads\RC.mp3',True)
 def main():
     #Set canvas then run
     MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
     arcade.schedule(on_draw, 1/60)
-    arcade.run()    
+    arcade.run()
 
 
 #Call main function to run
