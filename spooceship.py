@@ -7,10 +7,10 @@ def target():
     arcade.draw_circle_filled(200,300,40,(235,64,64),1)
     arcade.draw_circle_filled(200,500,40,(235,64,64),1)
     arcade.draw_circle_filled(200,700,40,(235,64,64),1)
-    arcade.draw_text("W", 189, 690, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
-    arcade.draw_text("A", 191, 490, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
-    arcade.draw_text("D", 192, 290, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
-    arcade.draw_text("S", 193, 90, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
+    arcade.draw_text("Q", 189, 690, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
+    arcade.draw_text("W", 191, 490, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
+    arcade.draw_text("E", 192, 290, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
+    arcade.draw_text("R", 193, 90, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
     
     
 
@@ -103,7 +103,7 @@ def on_draw(delta_time):
     
     arcade.draw_text("Score: " + str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
     #code below was used for debugging
-    # arcade.draw_text(str(spooceship_l), 100, 400, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+    # arcade.draw_text(str(spooceship_1l), 100, 400, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
     # arcade.draw_text(str(spooceship_w), 100, 600, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
     if on_draw.hit_x <= 10:
@@ -172,7 +172,7 @@ class MyGame(arcade.Window):
         global hits
         #User control
         if space_count == 0:
-            if key == arcade.key.UP or key == arcade.key.W:
+            if key == arcade.key.UP or key == arcade.key.Q:
                 space_count += 1
                 if on_draw.hit_y == 700:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
@@ -198,7 +198,7 @@ class MyGame(arcade.Window):
                     misses += 1
 
                     
-            if key == arcade.key.LEFT or key == arcade.key.A:
+            if key == arcade.key.LEFT or key == arcade.key.W:
                 space_count += 1
                 if on_draw.hit_y == 500:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
@@ -224,7 +224,7 @@ class MyGame(arcade.Window):
                     misses += 1
 
 
-            if key == arcade.key.RIGHT or key == arcade.key.D:
+            if key == arcade.key.RIGHT or key == arcade.key.E:
                 space_count += 1
                 if on_draw.hit_y == 300:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
@@ -249,7 +249,7 @@ class MyGame(arcade.Window):
                     window_s -= 1.2
                     misses += 1
 
-            if key == arcade.key.DOWN or key == arcade.key.S:
+            if key == arcade.key.DOWN or key == arcade.key.R:
                 space_count += 1 
                 if on_draw.hit_y == 100:
                     if on_draw.hit_x > 100 and on_draw.hit_x < 300:
