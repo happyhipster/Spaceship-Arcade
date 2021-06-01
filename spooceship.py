@@ -278,10 +278,13 @@ class MyGame(arcade.Window):
 
             if key == arcade.key.P:
                 score = -5
+
+            if key == arcade.key.O:
+                hit_speed = 0
                 
                 
             
-playsound('C:\Users\Andy\Downloads\RC.mp3',True)
+#playsound('‪C:\workspace\SPOOOCESHIPPP\RC.mp3')
 def main():
     #Set canvas then run
     MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
