@@ -1,4 +1,5 @@
 #importing the 'arcade' package and 'random' package
+#from playsound import playsound
 import arcade
 import random
 
@@ -60,8 +61,6 @@ def end(hm):
         arcade.draw_text("YOU LOST!", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
 #Declaring the variables
-SPOOD = 0
-SPEED = 5
 projectile_colour = arcade.color.WHITE
 score = 0
 hit_speed = 15
@@ -83,7 +82,6 @@ accuracy = 0
 #Function for animating
 def on_draw(delta_time):
     #access global variables in this function
-    global SPEED
     global space_count
     global score
     global hit_speed
@@ -154,7 +152,7 @@ class MyGame(arcade.Window):
     #setting the screen
     def __init__(self,width,height,title):
         super().__init__(width, height, title)
-        self.set_mouse_visible(False)
+        self.set_mouse_visible(True)
         arcade.set_background_color(arcade.color.BLACK)
 
     
