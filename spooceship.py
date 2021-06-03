@@ -119,7 +119,7 @@ def on_draw(delta_time):
         on_draw.hit_y = avoid_y_list[place_generator]
         projectile_colour = arcade.color.WHITE
 
-        #an if statement is used to check if the score is divisible by 5. If the score is divisible by 5, the hit_speed increases by 1
+        #if statement used to check if the score is divisible by 5. If the score is divisible by 5, the hit_speed increases by 1
         if score %5:
             hit_speed+=1
 
