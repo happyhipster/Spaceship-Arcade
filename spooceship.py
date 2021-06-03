@@ -1,8 +1,8 @@
 #importing the 'arcade' package and 'random' package
-from playsound import playsound
 import arcade
 import random
 
+#code to draw the guide circles
 def target():
     arcade.draw_circle_filled(200,100,40,(235,64,64),1)
     arcade.draw_circle_filled(200,300,40,(235,64,64),1)
@@ -12,10 +12,8 @@ def target():
     arcade.draw_text("W", 191, 490, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
     arcade.draw_text("E", 192, 290, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
     arcade.draw_text("R", 193, 90, arcade.color.WHITE, 20, 500, "left", "calibri", True, False)
-    
-    
 
-#Drawing stars in random coordinates
+#function to draw stars in random coordinates
 def stars():
     for i in range(100):
         ax = random.randint(0,1501)
@@ -23,7 +21,7 @@ def stars():
         arcade.draw_circle_filled(ax,ay,1,arcade.color.WHITE,1)
 
 
-#Drawing the spooceship
+#function to draw the spaceship
 def spoceship(x,y):
     arcade.draw_rectangle_filled(x, y, spooceship_w, spooceship_l, arcade.color.RED)
     arcade.draw_triangle_filled(x, y+spooceship_l/2, x-spooceship_w*0.75, y+spooceship_l*1.5, x-spooceship_w/2, y+spooceship_l/2, arcade.color.DARK_RED)
@@ -35,6 +33,7 @@ def spoceship(x,y):
     fire_inside_point_list = ((x-spooceship_w * 0.5, y+spooceship_l * 0.5), (x-spooceship_w*0.75,y+spooceship_l *0.25), (x-spooceship_w *0.65,y+spooceship_l* 0.1), (x-spooceship_w*0.8,y), (x-spooceship_w*0.7,y-spooceship_l*0.15), (x-spooceship_w*0.625,y-spooceship_l*0.25), (x-spooceship_w*0.6,y-spooceship_l*0.35), (x-spooceship_w*0.7,y-spooceship_l*0.45), (x-spooceship_w*0.5,y-spooceship_l*0.5))
     arcade.draw_polygon_filled(fire_inside_point_list, arcade.color.YELLOW)
 
+#function to draw the speed lines used in the end screen
 def speed_lines(decider):
     if decider == 0:
         for i in range(100):
@@ -44,9 +43,11 @@ def speed_lines(decider):
     else:
         arcade.draw_line(100000, 1000000, 10000+50 ,1000000, arcade.color.WHITE_SMOKE, 2)
 
+#function to draw the projectile that you must hit
 def hit(hit_x, hit_y):
     arcade.draw_circle_filled(hit_x,hit_y,radius, projectile_colour,1)        
 
+#functions for the end screens of the game
 def end(hm):
     global accuracy 
     if hm == True:
@@ -60,7 +61,7 @@ def end(hm):
         arcade.draw_circle_filled(0, 0, 100000, arcade.color.BLACK,1)
         arcade.draw_text("YOU LOST!", 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
-#Declaring the variables
+#declaring the variables
 projectile_colour = arcade.color.WHITE
 score = 0
 hit_speed = 15
@@ -79,7 +80,7 @@ misses = 0
 hits = 0
 accuracy = 0
 
-#Function for animating
+#function for animating
 def on_draw(delta_time):
     #access global variables in this function
     global space_count
@@ -92,18 +93,19 @@ def on_draw(delta_time):
     global spooceship_w
     global window_s
     arcade.start_render()
+
     #Calling functions to draw scenery
     stars()
     spoceship(on_draw.x, on_draw.y)
     hit(on_draw.hit_x, on_draw.hit_y)
     on_draw.hit_x -= hit_speed
     target()
-    
-    arcade.draw_text("Score: " + str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
-    #code below was used for debugging
-    # arcade.draw_text(str(spooceship_1l), 100, 400, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
-    # arcade.draw_text(str(spooceship_w), 100, 600, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
 
+    #Displays the score on the screen   
+    arcade.draw_text("Score: " + str(score), 100, 200, arcade.color.WHITE, 20, 100, "left", "calibri", True, False)
+ 
+    #if the projectile's x coordinate is less than 10, the projectile's x coordinate is set to 1500. 
+    #While doing so, conditionals are used to check if the user gains or loses points and prepares the next time the projectile goes around.
     if on_draw.hit_x <= 10:
         space_count = 0
         if projectile_colour == arcade.color.WHITE:
@@ -117,10 +119,11 @@ def on_draw(delta_time):
         on_draw.hit_y = avoid_y_list[place_generator]
         projectile_colour = arcade.color.WHITE
 
+        #an if statement is used to check if the score is divisible by 5. If the score is divisible by 5, the hit_speed increases by 1
         if score %5:
             hit_speed+=1
 
-    #victory screen
+    #conditional for the victory screen
     if score == 40:
         hit_speed = 0
         space_count = 5
@@ -130,24 +133,26 @@ def on_draw(delta_time):
         stars()
         on_draw.hit_x = 20000
 
-    #lose screen
+    #conditional for the lose screen
     if score == -5:
         space_count = 5
         hit_speed = 0
         end(False)
     
+    #conditional to set a limit to the smallest size of the spaceship
     if spooceship_w <= 164:
         spooceship_l = 82
         spooceship_w = 164
         window_s = 29.2
 
-
+#variables are declared
 on_draw.x = 700
 on_draw.y = 400
 on_draw.hit_x = 1500
 place_generator = random.randint(0,3)
 on_draw.hit_y = avoid_y_list[place_generator]
 
+#class for the game window
 class MyGame(arcade.Window):
     #setting the screen
     def __init__(self,width,height,title):
@@ -284,13 +289,12 @@ class MyGame(arcade.Window):
                 
                 
             
-#playsound('‪C:\workspace\SPOOOCESHIPPP\RC.mp3')
+#main function to run and create canvas
 def main():
-    #Set canvas then run
     MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
     arcade.schedule(on_draw, 1/60)
     arcade.run()
 
 
-#Call main function to run
+#main function called to run
 main()
