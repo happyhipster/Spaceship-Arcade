@@ -25,7 +25,7 @@ def stars():
         arcade.draw_circle_filled(ax,ay,star_size,arcade.color.WHITE,1)
 
 
-#Drawing the lines during the 'hyper space' process
+#Drawing the lines during the 'hyperspace' phase
 def speed_lines(decider):
     if decider == 0:
         for i in range(100):
@@ -86,7 +86,7 @@ def on_draw(delta_time):
     stars()
     spoceship(on_draw.x, on_draw.y)
 
-    #Conditions to carry out the animation
+    #Conditionals used during the animation
     if spooceship_w != 160:
         smaller(conditional)
 
@@ -95,6 +95,7 @@ def on_draw(delta_time):
         speed_lines(0)
         timer += 1
         print(timer)
+
     if timer == 100:
         speed_lines(10)
         SPEED_change  = 1
@@ -104,6 +105,7 @@ def on_draw(delta_time):
         timer = 0
         on_draw.x = 200
         SPEED = 0
+
     if timer == 0:
         planet()
 
@@ -113,20 +115,21 @@ def on_draw(delta_time):
     on_draw.x += SPEED
     on_draw.y += SPOOD
 
-    #conditional: if on_draw.x is more than the WINDOW_LENGTH+150 (once it reaches the end of the window, the spooceship goes back to the start again)
+    #boundary conditional: if on_draw.x is more than the WINDOW_LENGTH+150 (once it reaches the end of the window, the spooceship goes back to the start again) 
     if on_draw.x > WINDOW_LENGTH + 150:
         on_draw.x = -250
         SPEED *= SPEED_change 
 
-    #conditional: if on_draw.y is more than WINDOW_HEIGHT-700, change SPOOD by -2
+    #boundary conditional: if on_draw.y is more than WINDOW_HEIGHT-700, subtract SPOOD_change from SPOOD 
     if on_draw.y > WINDOW_HEIGHT-400:
         SPOOD -= SPOOD_change
 
-    #conditional: else if on_draw.y is less than 700, change SPOOD by 2
+    #boundary conditional: if on_draw.y is less than 700, add SPOOD_change from SPOOD
     elif on_draw.y < 400:
         SPOOD += SPOOD_change
 
 
+#declaring variables on_draw.x and on_draw.y
 on_draw.x = -200
 on_draw.y = 0
 
@@ -151,13 +154,13 @@ class MyGame(arcade.Window):
             if spooceship_w != 160:
                 if key == arcade.key.DOWN:
                     conditional = True
-                
+
+#main function which creates the canvas runs the code
 def main():
-    #Set canvas then run
     MyGame(WINDOW_LENGTH, WINDOW_HEIGHT, "SPOOCESHIP")
     arcade.schedule(on_draw, 1/60)
     arcade.run()    
 
 
-#Call main function to run
+#Call main function to run animation
 main()
